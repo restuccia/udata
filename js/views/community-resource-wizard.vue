@@ -1,5 +1,5 @@
 <template>
-<wizard v-ref:wizard :steps="steps" :title="_('New community resource')"></wizard>
+<wizard ref="wizard" :steps="steps" :title="_('New community resource')"></wizard>
 </template>
 
 <script>

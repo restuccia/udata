@@ -12,8 +12,8 @@ describe('Common Fields features', function() {
     beforeEach(function() {
         this.vm = new Vue({
             el: fixture.set(`
-                <form role="form" v-el:form>
-                    <field v-for="field in fields" v-ref:fields :field="field"
+                <form role="form" ref="form">
+                    <field v-for="field in fields" ref="fields" :field="field"
                         :schema="schema" :model="model"></field>
                 </form>`)[0],
             mixins: [BaseForm],

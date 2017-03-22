@@ -66,7 +66,7 @@
     <box :title="title" icon="retwett"
         boxclass="box-solid reuses-cards-widget"
         footerclass="text-center" :footer="true" :loading="loading">
-        <div class="card-list card-list--columned" v-el:sortable>
+        <div class="card-list card-list--columned" ref="sortable">
             <div class="col-xs-12 reuse-card-container"
                 v-for="reuse in (editing ? sorted : reuses)"
                 :key="reuse.id" :data-id="reuse.id"
@@ -89,7 +89,7 @@
                 <span class="input-group-addon">
                     <span class="fa fa-retweet"></span>
                 </span>
-                <reuse-completer v-ref:completer></reuse-completer>
+                <reuse-completer ref="completer"></reuse-completer>
                 <span class="input-group-btn">
                     <button class="btn btn-success" type="button"
                         @click="submit">

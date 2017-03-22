@@ -20,7 +20,7 @@ export default {
         },
         geojson: null
     },
-    ready() {
+    mounted() {
         this.map = L.map(this.$el, {
             center: config.map.init.center,
             zoom: config.map.init.zoom,

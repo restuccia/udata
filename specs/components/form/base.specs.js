@@ -17,7 +17,7 @@ describe('Common Form features', function() {
     describe('Empty form', function() {
         beforeEach(function() {
             this.vm = new Vue({
-                el: fixture.set('<form v-el:form />')[0],
+                el: fixture.set('<form ref="form" />')[0],
                 mixins: [BaseForm]
             });
         });
@@ -46,7 +46,7 @@ describe('Common Form features', function() {
     describe('Forms with fields and defs', function() {
         it('should have a correct schema', function() {
             const vm = new Vue({
-                el: fixture.set('<form v-el:form/>')[0],
+                el: fixture.set('<form ref="form/">')[0],
                 mixins: [BaseForm],
                 propsData: {
                     fields: [{
@@ -163,8 +163,8 @@ describe('Common Form features', function() {
             API.mock_defs({});
             this.vm = new Vue({
                 el: fixture.set(`
-                    <form role="form" v-el:form>
-                        <field v-for="field in fields" v-ref:fields :field="field"
+                    <form role="form" ref="form">
+                        <field v-for="field in fields" ref="fields" :field="field"
                             :schema="schema" :model="model">
                         </field>
                     </form>
@@ -251,8 +251,8 @@ describe('Common Form features', function() {
                     {id: 'nested.b'},
                 ];
 
-                this.vm.$els.form.querySelector('#nested\\.a').value = 'aa';
-                this.vm.$els.form.querySelector('#nested\\.b').value = 'bb';
+                this.vm.$refs.form.querySelector('#nested\\.a').value = 'aa';
+                this.vm.$refs.form.querySelector('#nested\\.b').value = 'bb';
 
                 expect(this.vm.serialize()).to.eql({
                     nested: {

@@ -44,7 +44,7 @@ new Vue({
             this.followersVisible = true;
         }
     },
-    ready() {
+    mounted() {
         log.debug('Organization display page');
 
         // Restore tab from hash

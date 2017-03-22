@@ -1,5 +1,5 @@
 <template>
-<modal v-ref:modal :title="_('Membership request')">
+<modal ref="modal" :title="_('Membership request')">
 
     <div class="modal-body">
         <p>{{ _('Your can add some details here for your membership request.') }}</p>

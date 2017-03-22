@@ -1,7 +1,7 @@
 <template>
 <modal :title="_('Confirm deletion')"
     class="modal-danger harvest-delete-modal"
-    v-ref:modal>
+    ref="modal">
 
     <div class="modal-body">
         <p class="lead text-center">

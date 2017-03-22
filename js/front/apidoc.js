@@ -37,7 +37,7 @@ window.hljs = hljs;
 
 new Vue({
     mixins: [FrontMixin],
-    ready() {
+    mounted() {
         hljs.initHighlightingOnLoad();
 
         const swaggerUi = new SwaggerUi({

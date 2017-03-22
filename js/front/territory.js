@@ -13,7 +13,7 @@ import LeafletMap from 'components/leaflet-map.vue';
 new Vue({
     mixins: [FrontMixin],
     components: {LeafletMap},
-    ready() {
+    mounted() {
         this.loadMap();
         log.debug('Territory page ready');
     },

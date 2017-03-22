@@ -5,7 +5,7 @@
 </style>
 
 <template>
-    <form role="form" v-el:form>
+    <form role="form" ref="form">
         <field v-for="field in fields" :field="field"
             :schema="schema" :model="model">
         </field>

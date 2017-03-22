@@ -1,13 +1,15 @@
 <template>
-<wizard v-ref:wizard :steps="steps" :title="_('New reuse')"></wizard>
+<wizard ref="wizard" :steps="steps" :title="_('New reuse')"></wizard>
 </template>
 
 <script>
-import Reuse from 'models/reuse';
 import API from 'api';
+import Reuse from 'models/reuse';
+import Wizard from 'components/widgets/wizard.vue';
 
 export default {
-    data: function() {
+    components: {Wizard},
+    data() {
         return {
             reuse: new Reuse(),
             steps: [{
@@ -72,9 +74,6 @@ export default {
                 }
             }],
          };
-    },
-    components: {
-        wizard: require('components/widgets/wizard.vue')
     },
     events: {
         'wizard:next-step': function() {

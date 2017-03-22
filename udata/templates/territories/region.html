@@ -71,7 +71,7 @@
 
     <aside class="col-sm-4 col-xs-12">
         <div class="panel panel-default">
-            <leaflet-map v-ref:map class="aside-map" :popup="false"
+            <leaflet-map ref="map" class="aside-map" :popup="false"
                 data-zones="{{ url_for('api.zones', ids=[territory.id]) }}">
             </leaflet-map>
         </div>

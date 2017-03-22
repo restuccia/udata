@@ -18,7 +18,7 @@
 <div>
 <modal :title="resource.title" class="resource-modal" :large="edit"
     :class="{ 'modal-danger': confirm, 'modal-primary': !confirm }"
-    v-ref:modal>
+    ref="modal">
     <div class="modal-body">
         <div v-show="!edit && !confirm">
             {{{ resource.description | markdown }}}
@@ -59,7 +59,7 @@
             </dl>
         </div>
 
-        <resource-form v-if="edit" v-ref:form :dataset="dataset" :resource="resource" :hide-notifications="false"></resource-form>
+        <resource-form v-if="edit" ref="form" :dataset="dataset" :resource="resource" :hide-notifications="false"></resource-form>
 
         <div v-show="confirm">
             <p class="lead text-center">

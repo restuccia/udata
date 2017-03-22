@@ -63,7 +63,7 @@ export default {
             HAS_FILE_API,
         };
     },
-    ready() {
+    mounted() {
         this.$dnd = new qq.DragAndDrop({
             dropZoneElements: [this.$el],
             classes: {

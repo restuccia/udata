@@ -1,6 +1,6 @@
 <template>
-    <div class="chart" :style="{height: height}" v-el:container>
-        <canvas v-el:canvas height="100%"></canvas>
+    <div class="chart" :style="{height: height}" ref="container">
+        <canvas ref="canvas" height="100%"></canvas>
     </div>
 </template>
 

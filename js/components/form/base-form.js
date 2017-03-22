@@ -144,7 +144,7 @@ export default {
         },
         $form() {
             if (!this) return;  // Prevent console noise on a non significant error
-            return this.$refs.form || this.$els.form || this.$el;
+            return this.$refs.form || this.$el;
         }
     },
     attached() {

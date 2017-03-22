@@ -15,7 +15,7 @@
 </style>
 
 <template>
-<modal v-ref:modal :title="title" class="discussion-modal" large
+<modal ref="modal" :title="title" class="discussion-modal" large
     :class="{'modal-danger': deleting}">
     <div class="modal-body" v-show="!deleting">
         <div class="row card-container">
@@ -49,7 +49,7 @@
         </p>
     </div>
     <footer class="modal-footer text-center" v-show="!deleting">
-        <form v-if="!discussion.closed" v-el:form>
+        <form v-if="!discussion.closed" ref="form">
             <div class="form-group">
                 <textarea class="form-control" rows="3"
                     :placeholder="_('Type your comment')"

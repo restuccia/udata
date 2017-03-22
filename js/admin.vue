@@ -1,7 +1,7 @@
 <template>
 <div>
     <!-- Placeholder for non-routable modals -->
-    <div v-el:modal></div>
+    <div ref="modal"></div>
     <app-header></app-header>
     <sidebar></sidebar>
     <router-view></router-view>
@@ -43,7 +43,7 @@ export default {
             this.notifications.splice(index, 1);
         }
     },
-    ready() {
+    mounted() {
         // Display an error identifier un uncaught error
         document.addEventListener('ravenSuccess', (e) => {
             this.notifications.push({

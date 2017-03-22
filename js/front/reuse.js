@@ -22,7 +22,7 @@ new Vue({
     components: {
         FollowButton, ShareButton, DiscussionThreads, FeaturedButton, IssuesButton, IntegrateButton
     },
-    ready() {
+    mounted() {
         log.debug('Reuse display page');
     },
     methods: {

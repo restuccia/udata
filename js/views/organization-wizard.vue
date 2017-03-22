@@ -1,6 +1,6 @@
 <template>
 <div>
-<wizard v-ref:wizard :steps="steps" :title="_('New organization')"></wizard>
+<wizard ref="wizard" :steps="steps" :title="_('New organization')"></wizard>
 </div>
 </template>
 

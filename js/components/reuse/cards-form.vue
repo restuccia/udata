@@ -60,14 +60,14 @@
                 <span class="input-group-addon">
                     <span class="fa fa-retweet"></span>
                 </span>
-                <completer v-ref:completer></completer>
+                <completer ref="completer"></completer>
             </div>
         </div>
     </div>
     <div class="row" v-show="!reuses.length">
         <p class="lead text-center">{{ _('No related reuses') }}</p>
     </div>
-    <div class="card-list card-list--columned" v-el:sortable v-show="reuses.length">
+    <div class="card-list card-list--columned" ref="sortable" v-show="reuses.length">
         <div class="col-xs-12 col-md-6 col-lg-4 reuse-card-container"
             v-for="reuseid in reuses | ids"
             :data-id="reuseid">

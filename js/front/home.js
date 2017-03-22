@@ -16,7 +16,7 @@ import 'bootstrap';
 
 new Vue({
     mixins: [FrontMixin],
-    ready() {
+    mounted() {
         log.debug('Home page');
         $('.carousel').carousel();
     }

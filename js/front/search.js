@@ -12,7 +12,7 @@ import Vue from 'vue';
 
 new Vue({
     mixins: [FrontMixin, FacetsMixin],
-    ready() {
+    mounted() {
         log.debug('Search page');
     },
     methods: {

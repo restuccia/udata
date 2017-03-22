@@ -1,7 +1,7 @@
 <template>
 <div>
 <form-layout icon="cubes" :title="title" :save="save" :cancel="cancel" footer="true" :model="dataset">
-    <dataset-form v-ref:form :dataset="dataset"></dataset-form>
+    <dataset-form ref="form" :dataset="dataset"></dataset-form>
 </form-layout>
 </div>
 </template>

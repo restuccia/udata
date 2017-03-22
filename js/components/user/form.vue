@@ -1,6 +1,6 @@
 <template>
 <div>
-    <vform v-ref:form :fields="fields" :model="user"></vform>
+    <vform ref="form" :fields="fields" :model="user"></vform>
 </div>
 </template>
 

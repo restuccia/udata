@@ -1,7 +1,7 @@
 <template>
 <div>
 <form-layout icon="building" :title="title" :save="save" :cancel="cancel" footer="true" :model="org">
-    <org-form v-ref:form :organization="org"></org-form>
+    <org-form ref="form" :organization="org"></org-form>
 </form-layout>
 </div>
 </template>

@@ -436,9 +436,9 @@ describe('Base lists', function() {
                 const vm = new Vue({
                     el: fixture.set('<div/>')[0],
                     template: `<div>
-                                    <span v-el:page>{{things.page}}</span>
-                                    <span v-el:pages>{{things.pages}}</span>
-                                    <ul v-el:list>
+                                    <span ref="page">{{things.page}}</span>
+                                    <span ref="pages">{{things.pages}}</span>
+                                    <ul ref="list">
                                         <li v-for="thing in things.data">{{thing.name}}</li>
                                     </ul>
                                 </div>`,
@@ -452,26 +452,26 @@ describe('Base lists', function() {
                 });
                 const response = JSON.stringify(thingFactory(5));
 
-                expect(vm.$els.list.children).to.have.length(0);
-                expect(vm.$els.page).to.have.text('1');
-                expect(vm.$els.pages).to.have.text('0');
+                expect(vm.$refs.list.children).to.have.length(0);
+                expect(vm.$refs.page).to.have.text('1');
+                expect(vm.$refs.pages).to.have.text('0');
                 vm.things.fetch({id: 'abc'});
                 this.requests[0].respond(200,
                     {'Content-Type': 'application/json'},
                     response
                 );
-                expect(vm.$els.list.children).to.have.length(4);
-                expect(vm.$els.page).to.have.text('1');
-                expect(vm.$els.pages).to.have.text('2');
+                expect(vm.$refs.list.children).to.have.length(4);
+                expect(vm.$refs.page).to.have.text('1');
+                expect(vm.$refs.pages).to.have.text('2');
             });
 
             it('allows detect page changes', function() {
                 const vm = new Vue({
                     el: fixture.set('<div/>')[0],
                     template: `<div>
-                                    <span v-el:page>{{things.page}}</span>
-                                    <span v-el:pages>{{things.pages}}</span>
-                                    <ul v-el:list>
+                                    <span ref="page">{{things.page}}</span>
+                                    <span ref="pages">{{things.pages}}</span>
+                                    <ul ref="list">
                                         <li v-for="thing in things.data">{{thing.name}}</li>
                                     </ul>
                                 </div>`,
@@ -485,21 +485,21 @@ describe('Base lists', function() {
                 });
                 const response = JSON.stringify(thingFactory(5));
 
-                expect(vm.$els.list.children).to.have.length(0);
-                expect(vm.$els.page).to.have.text('1');
-                expect(vm.$els.pages).to.have.text('0');
+                expect(vm.$refs.list.children).to.have.length(0);
+                expect(vm.$refs.page).to.have.text('1');
+                expect(vm.$refs.pages).to.have.text('0');
                 vm.things.fetch({id: 'abc'});
                 this.requests[0].respond(200,
                     {'Content-Type': 'application/json'},
                     response
                 );
-                expect(vm.$els.list.children).to.have.length(4);
-                expect(vm.$els.page).to.have.text('1');
-                expect(vm.$els.pages).to.have.text('2');
+                expect(vm.$refs.list.children).to.have.length(4);
+                expect(vm.$refs.page).to.have.text('1');
+                expect(vm.$refs.pages).to.have.text('2');
                 vm.things.nextPage();
-                expect(vm.$els.list.children).to.have.length(1);
-                expect(vm.$els.page).to.have.text('2');
-                expect(vm.$els.pages).to.have.text('2');
+                expect(vm.$refs.list.children).to.have.length(1);
+                expect(vm.$refs.page).to.have.text('2');
+                expect(vm.$refs.pages).to.have.text('2');
             });
         });
     });

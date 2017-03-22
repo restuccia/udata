@@ -1,10 +1,10 @@
 <template>
 <div>
-<modal class="modal-primary add-resource-modal" v-ref:modal
+<modal class="modal-primary add-resource-modal" ref="modal"
     :title="_('Add a resource')" :large="editing">
 
     <div class="modal-body">
-        <resource-form v-ref:form :dataset="dataset"></resource-form>
+        <resource-form ref="form" :dataset="dataset"></resource-form>
     </div>
 
     <footer class="modal-footer text-center">

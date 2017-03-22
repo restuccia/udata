@@ -4,7 +4,7 @@
         <label for="title-new-discussion">{{ _('Title') }}</label>
         <input v-el:title type="text" id="title-new-discussion" v-model="title" class="form-control" required />
         <label for="comment-new-discussion">{{ _('Comment') }}</label>
-        <textarea v-el:textarea id="comment-new-discussion" v-model="comment" class="form-control" rows="3" required></textarea>
+        <textarea ref="textarea" id="comment-new-discussion" v-model="comment" class="form-control" rows="3" required></textarea>
     </div>
     <button type="submit" :disabled="this.sending || !this.title || !this.comment" class="btn btn-primary btn-block submit-new-discussion">
         {{ _('Start a discussion') }}
@@ -36,10 +36,10 @@ export default {
             this.comment = comment;
             this.title = title || '';
             if (title) {
-                this.$els.textarea.setSelectionRange(comment.length, comment.length);
-                this.$els.textarea.focus();
+                this.$refs.textarea.setSelectionRange(comment.length, comment.length);
+                this.$refs.textarea.focus();
             } else {
-                this.$els.title.focus();
+                this.$refs.title.focus();
             }
         },
         submit() {

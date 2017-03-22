@@ -1,5 +1,5 @@
 <template>
-<modal class="add-reuse-modal" v-ref:modal :title="_('Add a reuse')">
+<modal class="add-reuse-modal" ref="modal" :title="_('Add a reuse')">
     <div class="modal-body">
         <p>{{ _('You can either add a new reuse or an existing one') }}</p>
         <div class="row reuses-list in-modal">

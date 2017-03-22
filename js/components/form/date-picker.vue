@@ -11,8 +11,8 @@
 <div class="input-group dropdown date-picker" :class="{ 'open': picking }"
     v-outside="onOutside">
     <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-    <input type="text" class="form-control" v-el:input
-        @focus="onFocus" @input="onChange | debounce 500"
+    <input type="text" class="form-control" ref="input"
+        @focus="onFocus" @input="onChange"
         :placeholder="placeholder"
         :required="required"
         :value="value|dt dateFormat ''"

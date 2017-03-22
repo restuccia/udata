@@ -1,7 +1,7 @@
 <template>
 <div>
     <form-layout icon="newspaper-o" :title="title" :save="save" :cancel="cancel" footer="true" :model="post">
-        <post-form v-ref:form :post="post"></post-form>
+        <post-form ref="form" :post="post"></post-form>
         <button slot="right-actions"
             class="btn btn-primary"
             @click.prevent="saveAndContinue">

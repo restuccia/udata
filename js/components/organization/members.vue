@@ -106,7 +106,7 @@
             </div>
             <div v-if="request.refused">
                 <form>
-                    <textarea v-el:textarea class="form-control" rows="3" required></textarea>
+                    <textarea ref="textarea" class="form-control" rows="3" required></textarea>
                 </form>
                 <div class="input-group-btn">
                     <button class="btn btn-danger btn-flat btn-xs pull-right"
@@ -129,7 +129,7 @@
             <span class="input-group-addon">
                 <span class="fa fa-user"></span>
             </span>
-            <user-completer v-ref:completer></user-completer>
+            <user-completer ref="completer"></user-completer>
             <span class="input-group-btn">
                 <button class="btn btn-warning" type="button"
                     @click="adding = false;">
@@ -194,7 +194,7 @@ export default {
         },
         confirm_refusal(request, index) {
             // Temp fix until https://github.com/vuejs/vue/issues/1697 is merged
-            // let comment = this.$els.textarea[index].value;
+            // let comment = this.$refs.textarea[index].value;
             const comment = this.$el.querySelectorAll('textarea')[index].value;
             this.org.refuse_membership(request, comment, (response) => {
                 log.debug('refused', response);
@@ -220,7 +220,7 @@ export default {
             }
         }
     },
-    ready() {
+    mounted() {
         if (window.location.hash === '#membership-requests') {
             this.validating = true;
         }

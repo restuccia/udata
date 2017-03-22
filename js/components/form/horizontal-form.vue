@@ -1,5 +1,5 @@
 <template>
-    <form role="form" :class="{ 'form-horizontal': 1 }" v-el:form>
+    <form role="form" :class="{ 'form-horizontal': 1 }" ref="form">
         <field v-for="field in fields" :field="field"
             :schema="schema" :model="model"></field>
     </form>

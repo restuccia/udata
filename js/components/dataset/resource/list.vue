@@ -53,7 +53,7 @@
                     <th width="100" v-i18n="Availability"></th>
                 </tr>
             </thead>
-            <tbody v-el:sortable>
+            <tbody ref="sortable">
                 <tr v-for="file in files" track-by="id">
                     <td v-if="reordering"></td>
                     <td>
@@ -178,7 +178,7 @@ export default {
             this.files.splice(this.files.indexOf(file), 1);
         }
     },
-    ready() {
+    mounted() {
         /* In case of a new resource, we display the appropriated popin
            on load. */
         if ("new_resource" in this.$route.query) {

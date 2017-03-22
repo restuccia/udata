@@ -2,7 +2,7 @@
 <form role="form" class="clearfix animated" @submit.prevent="submit">
     <div class="form-group">
         <label for="comment-new-message">{{ _('Comment') }}</label>
-        <textarea v-el:textarea id="comment-new-message" v-model="comment" class="form-control" rows="3" required></textarea>
+        <textarea ref="textarea" id="comment-new-message" v-model="comment" class="form-control" rows="3" required></textarea>
     </div>
     <button type="submit" :disabled="this.sending || !this.comment" class="btn btn-primary btn-block pull-right submit-new-message">
         {{ _('Submit your comment') }}
@@ -32,8 +32,8 @@ export default {
       prefill(comment) {
           comment = comment || '';
           this.comment = comment;
-          this.$els.textarea.setSelectionRange(comment.length, comment.length);
-          this.$els.textarea.focus();
+          this.$refs.textarea.setSelectionRange(comment.length, comment.length);
+          this.$refs.textarea.focus();
       },
       submit() {
           this.sending = true;

@@ -72,21 +72,21 @@
 <template>
 <div class="thumbnailer" v-show="preview" :class="{ 'centered': centered }">
     <div class="row">
-        <div class="col-xs-12 col-sm-8 crop-pane" v-el:crop_pane>
-            <img class="cropper" v-el:cropper/>
+        <div class="col-xs-12 col-sm-8 crop-pane" ref="crop_pane">
+            <img class="cropper" ref="cropper/">
         </div>
-        <div class="col-xs-12 col-sm-4 preview-pane" v-el:preview_pane>
+        <div class="col-xs-12 col-sm-4 preview-pane" ref="preview_pane">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" v-el:checkbox v-model="centered">
+                    <input type="checkbox" ref="checkbox" v-model="centered">
                     {{ _('Center the full picture') }}
                 </label>
             </div>
             <h5>{{ _('Preview') }}</h5>
             <div class="preview-container" v-for="size in sizes"
-                v-el:preview_containers
+                ref="preview_containers"
                 :style="{width: size+'px', height: size+'px'}">
-                <img class="preview" :alt="_('Preview')" v-el:previews :src="src"/>
+                <img class="preview" :alt="_('Preview')" ref="previews" :src="src"/>
             </div>
         </div>
     </div>
@@ -115,7 +115,7 @@ export default {
          * Get the current crop Bounding Box (realsize) if any.
          */
         bbox() {
-            if (!this.$els.checkbox.checked) {
+            if (!this.$refs.checkbox.checked) {
                 const selection = this.Jcrop.tellSelect();
                 return [selection.x, selection.y, selection.x2, selection.y2];
             }
@@ -129,7 +129,7 @@ export default {
             const bounds = this.Jcrop.getBounds();
             const [w, h] = bounds;
             // Temp fix until https://github.com/vuejs/vue/issues/1697 is merged
-            // containers = this.$els.preview_containers;
+            // containers = this.$refs.preview_containers;
             const containers = [...this.$el.querySelectorAll('.preview-container')];
 
             containers.forEach(function(el) {
@@ -151,11 +151,11 @@ export default {
             if (!src) return;
 
             const that = this;  // Still required because we also need the default `this`.
-            const $pane = $(this.$els.crop_pane);
+            const $pane = $(this.$refs.crop_pane);
             const max_width = $pane.width();
             const max_height = parseInt($pane.css('max-height').replace('px', ''));
 
-            $(this.$els.cropper)
+            $(this.$refs.cropper)
                 .attr('src', src)
                 .Jcrop({
                     onChange: this.preview.bind(this),
@@ -182,7 +182,7 @@ export default {
 
                 this.Jcrop.disable();
 
-                $(this.$els.preview_containers)
+                $(this.$refs.preview_containers)
                     .find('.preview')
                     .removeAttr('style')
                     .css(attr, '100%');

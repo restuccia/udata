@@ -1,6 +1,7 @@
 {% extends theme('raw.html') %}
 
 {% block body %}
+<div id="app">
     {% include theme("header.html") with context %}
     {% block subnav %}{% endblock %}
 
@@ -20,4 +21,5 @@
     {% include theme('footer.html') %}
     {% include theme('publish-action-modal.html') %}
     {% block modals %}{% endblock %}
+</div>
 {% endblock %}

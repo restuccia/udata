@@ -1,5 +1,5 @@
 <template>
-<vform v-ref:form :fields="fields" :model="organization"></vform>
+<vform ref="form" :fields="fields" :model="organization"></vform>
 </template>
 
 <script>

@@ -32,7 +32,7 @@
                 <p>{{ _('or') }}</p>
             </div>
             <div class="text-center col-xs-12">
-                <span class="btn btn-outline btn-flat" v-el:upload-btn>
+                <span class="btn btn-outline btn-flat" ref="upload-btn">
                     {{ _('Select a file from your computer') }}
                 </span>
             </div>
@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-    <thumbnailer v-ref:thumbnailer v-if="resizing" :src="src" :sizes="sizes">
+    <thumbnailer ref="thumbnailer" v-if="resizing" :src="src" :sizes="sizes">
     </thumbnailer>
 </div>
 </template>

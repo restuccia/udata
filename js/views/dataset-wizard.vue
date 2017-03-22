@@ -1,6 +1,6 @@
 <template>
 <div>
-<wizard v-ref:wizard :steps="steps" :title="_('New dataset')"></wizard>
+<wizard ref="wizard" :steps="steps" :title="_('New dataset')"></wizard>
 </div>
 </template>
 

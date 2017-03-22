@@ -8,9 +8,9 @@
 
 <template>
 <div>
-<modal :title="title" class="image-picker-modal modal-info" v-ref:modal>
+<modal :title="title" class="image-picker-modal modal-info" ref="modal">
     <div class="modal-body">
-        <picker v-ref:picker :endpoint="endpoint" :sizes="sizes"></picker>
+        <picker ref="picker" :endpoint="endpoint" :sizes="sizes"></picker>
     </div>
     <footer class="modal-footer">
         <button type="button" class="btn btn-primary btn-flat pull-left"

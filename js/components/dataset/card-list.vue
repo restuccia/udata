@@ -66,7 +66,7 @@
     <box :title="title" icon="cubes"
         boxclass="box-solid datasets-cards-widget"
         footerclass="text-center" :footer="true" :loading="loading">
-        <div class="card-list card-list--columned" v-el:sortable>
+        <div class="card-list card-list--columned" ref="sortable">
             <div class="col-xs-12 dataset-card-container"
                 v-for="dataset in (editing ? sorted : datasets)"
                 :data-id="dataset.id"
@@ -89,7 +89,7 @@
                 <span class="input-group-addon">
                     <span class="fa fa-cubes"></span>
                 </span>
-                <dataset-completer v-ref:completer></dataset-completer>
+                <dataset-completer ref="completer"></dataset-completer>
                 <span class="input-group-btn">
                     <button class="btn btn-success" type="button"
                         @click="submit">

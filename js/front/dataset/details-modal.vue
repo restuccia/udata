@@ -1,5 +1,5 @@
 <template>
-<modal class="extras-modal" v-ref:modal :title="_('Details')">
+<modal class="extras-modal" ref="modal" :title="_('Details')">
 
     <div class="modal-body">
         <dl class="dl-horizontal dl-wide">

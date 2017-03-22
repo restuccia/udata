@@ -105,7 +105,7 @@ export default {
             }
         }
     },
-    ready() {
+    mounted() {
         if (!this.field || !this.field.readonly) {
             this.selectize = $(this.$el).selectize(this.selectize_options)[0].selectize;
         }

@@ -1,14 +1,14 @@
 <!-- sidebar: style can be found in sidebar.less -->
 <template>
 <aside class="main-sidebar">
-    <scrollbox v-ref:scrollbox>
+    <scrollbox ref="scrollbox">
         <section class="sidebar">
             <!-- search form -->
             <div class="sidebar-form">
                 <form method="get" @submit.prevent="onSearch">
                     <div class="input-group">
                         <input type="text" name="q" class="form-control"
-                            :placeholder="search_label" v-el:terms />
+                            :placeholder="search_label" ref="terms" />
                         <span class="input-group-btn">
                             <button type="submit" name="search" id="search-btn" class="btn btn-flat">
                                 <i class="fa fa-search"></i>
@@ -136,7 +136,7 @@ export default {
     },
     methods: {
         onSearch() {
-            const terms = this.$els.terms.value;
+            const terms = this.$refs.terms.value;
             if (terms && terms.length > 2) {
                 this.$go({name: 'search', query: { q: terms }});
             }

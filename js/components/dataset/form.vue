@@ -1,6 +1,6 @@
 <template>
 <div>
-<vertical-form v-ref:form :fields="fields" :model="dataset"></vertical-form>
+<vertical-form ref="form" :fields="fields" :model="dataset"></vertical-form>
 </div>
 </template>
 

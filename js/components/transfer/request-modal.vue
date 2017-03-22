@@ -1,6 +1,6 @@
 <template>
 <div>
-<modal v-ref:modal :title="_('Transfer request')" class="modal-info transfer-request-modal">
+<modal ref="modal" :title="_('Transfer request')" class="modal-info transfer-request-modal">
     <div class="modal-body">
         <div class="text-center row" v-if="!type">
             <p class="lead col-xs-12">{{ _('Transfer to') }}</p>

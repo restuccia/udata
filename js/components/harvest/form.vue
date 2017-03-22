@@ -1,8 +1,8 @@
 <template>
 <div>
-    <v-form v-ref:form :fields="fields" :model="source"></v-form>
-    <config-form v-ref:config-form :config="source.config || {}" :backend="backend"></config-form>
-    <v-form v-ref:post-form :fields="postFields" :model="source"></v-form>
+    <v-form ref="form" :fields="fields" :model="source"></v-form>
+    <config-form ref="config-form" :config="source.config || {}" :backend="backend"></config-form>
+    <v-form ref="post-form" :fields="postFields" :model="source"></v-form>
 </div>
 </template>
 

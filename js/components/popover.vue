@@ -2,7 +2,7 @@
 <div class="popover" :class="classes" v-show="show" :style="style" :transition="effect">
     <div class="arrow"></div>
     <h3 class="popover-title" v-show="title">{{title}}</h3>
-    <div class="popover-content" v-el:content>{{content}}</div>
+    <div class="popover-content" ref="content">{{content}}</div>
 </div>
 </template>
 <script>
@@ -37,8 +37,8 @@ export default {
          */
         content(value) {
             if (value instanceof HTMLElement) {
-                this.$els.content.innerHTML = '';
-                this.$els.content.appendChild(value);
+                this.$refs.content.innerHTML = '';
+                this.$refs.content.appendChild(value);
             }
         }
     }

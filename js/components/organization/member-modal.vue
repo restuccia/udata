@@ -14,8 +14,8 @@
 
 <template>
 <div>
-<user-modal :user="user" v-ref:modal>
-    <role-form class="member-form" v-ref:form
+<user-modal :user="user" ref="modal">
+    <role-form class="member-form" ref="form"
         :fields="fields" :model="member" :defs="defs"
         :readonly="!can_edit" :fill="true">
     </role-form>
@@ -83,7 +83,7 @@ export default {
             return this.org.is_member(this.user);
         }
     },
-    ready() {
+    mounted() {
         this.user.fetch(this.member.user.id);
     },
     methods: {

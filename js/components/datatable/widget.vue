@@ -48,7 +48,7 @@
     {{ empty || _('No data')}}
     </div>
     <footer slot="footer">
-        <div :class="{ 'pull-right': p.pages > 1 }" v-el:footer_container>
+        <div :class="{ 'pull-right': p.pages > 1 }" ref="footer_container">
             <slot name="footer"></slot>
         </div>
         <pagination-widget :p="p"></pagination-widget>
@@ -73,8 +73,8 @@ export default {
     },
     computed: {
         has_footer_children() {
-            return this.$els.footer_container
-                && this.$els.footer_container.children.length;
+            return this.$refs.footer_container
+                && this.$refs.footer_container.children.length;
         },
         show_footer() {
             return (this.p && this.p.pages > 1) || this.has_footer_children;

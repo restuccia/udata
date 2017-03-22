@@ -30,7 +30,7 @@
     </div>
     <div class="list-group" v-show="detailed">
        <thread-message
-           v-for="(index, response) in discussion.discussion"
+           v-for="(index, response) in discussion.discussion" :key="index"
            id="{{ discussionIdAttr }}-{{ index }}"
            :discussion="discussionIdAttr"
            :index="index"
@@ -59,7 +59,7 @@
     <div class="panel-footer" v-if="discussion.closed">
         <div class="text-muted">
             {{ _('Discussion has been closed') }}
-            {{ _('by') }} <a href="{{ discussion.closed_by.page }}">{{ discussion.closed_by | display }}</a>
+            {{ _('by') }} <a :href="discussion.closed_by.page">{{ discussion.closed_by | display }}</a>
             {{ _('on') }} {{ closedDate }}
         </div>
     </div>
@@ -130,8 +130,8 @@ export default {
             this.displayForm()
             // Wait for next tick because the form needs to be visible to scroll
             this.$nextTick(() => {
-                if (this.$els.form && this.$refs.form) { // Avoid logging errors
-                    this.$scrollTo(this.$els.form);
+                if (this.$refs.form && this.$refs.form) { // Avoid logging errors
+                    this.$scrollTo(this.$refs.form);
                     this.$refs.form.prefill(comment);
                 }
             })

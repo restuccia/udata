@@ -130,7 +130,7 @@
                     <p>{{ _( "or") }}</p>
                 </div>
                 <div class="text-center col-xs-12">
-                    <span v-el:upload-btn class="btn btn-outline btn-flat">
+                    <span ref="upload-btn" class="btn btn-outline btn-flat">
                     {{ _("Select a file from your computer") }}
                     </span>
                 </div>

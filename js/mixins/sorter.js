@@ -1,8 +1,8 @@
 import Sortable from 'sortablejs';
 
 export default {
-    ready() {
-        this.$sortable = Sortable.create(this.$els.sortable, {
+    mounted() {
+        this.$sortable = Sortable.create(this.$refs.sortable, {
             disabled: this.$options.sortable.disabled,
             store: this.$options.sortable.store,
             handle: this.$options.sortable.handle,

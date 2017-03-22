@@ -11,7 +11,7 @@
 </style>
 
 <template>
-<modal v-ref:modal :title="_('Issue')" class="issue-modal" large>
+<modal ref="modal" :title="_('Issue')" class="issue-modal" large>
     <div class="modal-body">
         <div class="row">
             <dataset-card class="col-xs-12 col-md-offset-3 col-md-6"
@@ -36,7 +36,7 @@
         </div>
     </div>
     <footer class="modal-footer text-center">
-        <form v-if="can_comment" v-el:form>
+        <form v-if="can_comment" ref="form">
             <div class="form-group">
                 <textarea class="form-control" rows="3"
                     :placeholder="_('Type your comment')"

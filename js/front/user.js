@@ -24,7 +24,7 @@ new Vue({
             currentTab: 0,
         };
     },
-    ready() {
+    mounted() {
         log.debug('User display page');
 
         // Restore tab from hash

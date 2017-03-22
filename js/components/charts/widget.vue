@@ -4,8 +4,8 @@
         boxclass="box-solid"
         bodyclass="chart-responsive"
         :loading="metrics.loading">
-        <div class="chart" :style="{height: height}" v-el:container>
-            <canvas v-el:canvas height="100%"></canvas>
+        <div class="chart" :style="{height: height}" ref="container">
+            <canvas ref="canvas" height="100%"></canvas>
         </div>
     </box>
 </div>
@@ -126,17 +126,19 @@ export default {
                     dataset.pointHoverBorderColor = color;
 
                     dataset.data = raw.map(item => item[serie.id]);
-                    
+
                     return dataset;
                 })
             };
         }
     },
     components: {Box},
-    ready() {
-        this.canvasHeight = this.$els.container.clientHeight;
-        this.buildChart();
-        this.metrics.$on('updated', this.buildChart.bind(this));
+    mounted() {
+        this.$nextTick(function() {
+            this.canvasHeight = this.$refs.container.clientHeight;
+            this.buildChart();
+            this.metrics.$on('updated', this.buildChart.bind(this));
+        });
     },
     beforeDestroy() {
         this.cleanChart();
@@ -154,7 +156,7 @@ export default {
                 return;
             }
             const factory = this['build' + this.chartType];
-            const ctx = this.$els.canvas.getContext('2d');
+            const ctx = this.$refs.canvas.getContext('2d');
             this.cleanChart();
             ctx.canvas.height = this.canvasHeight;
             this.chart = factory(ctx);

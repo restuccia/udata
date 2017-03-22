@@ -30,7 +30,7 @@
 
 {% block content %}
 <!-- Placeholder for non-routable modals -->
-<div v-el:modal></div>
+<div ref="modal"></div>
 <section class="content {% if not dataset.organization.public_service %}non{% endif %}certified">
     <div class="container dataset-container">
         <div class="row">
@@ -329,7 +329,7 @@
                     <div class="panel-body">
                         <h3>{{ _('Spatial coverage') }}</h3>
                         {% if dataset.spatial.zones %}
-                            <leaflet-map v-ref:map class="aside-map"
+                            <leaflet-map ref="map" class="aside-map"
                                 data-zones="{{ url_for('api.zones', ids=dataset.spatial.zones) }}">
                             </leaflet-map>
                         {% elif dataset.spatial.geom %}
@@ -374,7 +374,7 @@
         <h3 id="community-discussions">{{ _('Discussions') }}</h3>
         <div class="row">
             <div class="col-sm-9">
-                <discussion-threads v-ref:discussions
+                <discussion-threads ref="discussions"
                     subject-id="{{ dataset.id }}"
                     subject-class="{{ dataset.__class__.__name__ }}">
                 </discussion-threads>

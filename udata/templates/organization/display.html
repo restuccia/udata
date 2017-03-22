@@ -58,7 +58,7 @@
     ('followers', _('Followers'), followers, {}),
 ) %}
 
-<tabset :active.sync="currentTab" v-ref:tabs nav-style="pills">
+<tabset :active.sync="currentTab" ref="tabs" nav-style="pills">
     {% for tab_id, label, datasets, kwargs in dataset_tabs  %}
     {% if datasets %}
     <tab id="{{tab_id}}" header="{{label}}">

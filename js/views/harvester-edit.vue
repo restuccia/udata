@@ -1,7 +1,7 @@
 <template>
 <div>
 <form-layout icon="tasks" :title="title" :save="save" :cancel="cancel" footer="true" :model="source">
-    <harvest-form v-ref:form :source="source"></harvest-form>
+    <harvest-form ref="form" :source="source"></harvest-form>
     <!--div class="row" slot="extras">
         <div class="col-xs-12">
             <box :title="_('Filters')">

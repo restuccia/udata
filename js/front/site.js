@@ -10,7 +10,7 @@ import Vue from 'vue';
 
 new Vue({
     mixins: [FrontMixin],
-    ready() {
+    mounted() {
         log.debug('Site page');
     }
 });

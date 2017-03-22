@@ -2,7 +2,7 @@
 <div>
 <modal :title="_('Badges')"
     class="modal-info badges-modal"
-    v-ref:modal>
+    ref="modal">
 
     <div class="modal-body">
         <div class="text-center row">

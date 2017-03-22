@@ -48,7 +48,7 @@ new Vue({
             visibleTypeLists: [],
         };
     },
-    ready() {
+    mounted() {
         this.loadCoverageMap();
         this.fetchReuses();
         if (document.location.hash) {
@@ -174,7 +174,7 @@ new Vue({
                 this.$modal(AddReuseModal, {
                     dataset: this.dataset,
                     reuses: reuses,
-                    formUrl: this.$els.addReuse.href,
+                    formUrl: this.$refs.addReuse.href,
                 });
             }
         },

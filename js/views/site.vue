@@ -144,7 +144,7 @@ export default {
             }
         }
     },
-    attached() {
+    mounted() {
         this.fetch_metrics();
         this.datasets.fetch();
         this.reuses.fetch();

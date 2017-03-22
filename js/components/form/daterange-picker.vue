@@ -19,15 +19,15 @@
     v-outside="onOutside">
     <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
     <input type="text" class="form-control"
-        v-el:start-input :placeholder="_('Start')"
-        @focus="onFocus" @input="onChange | debounce 500"
+        ref="start-input" :placeholder="_('Start')"
+        @focus="onFocus" @input="onChange"
         :required="required"
         :value="startValue|dt dateFormat ''"
         :readonly="readonly">
     <span class="input-group-addon">{{ _('to') }}</span>
     <input type="text" class="form-control daterange-picker-end"
-        v-el:end-input :placeholder="_('End')"
-        @focus="onFocus" @input="onChange | debounce 500"
+        ref="end-input" :placeholder="_('End')"
+        @focus="onFocus" @input="onChange"
         :required="required"
         :value="endValue|dt dateFormat ''"
         :readonly="readonly">
@@ -39,10 +39,10 @@
     <div class="dropdown-menu" :style="dropdownStyle">
         <calendar v-ref:calendar :selected="currentValue" :min="dateMin" :max="dateMax"></calendar>
     </div>
-    <input type="hidden" v-el:start-hidden
+    <input type="hidden" ref="start-hidden"
         :id="startId" :name="startId"
         :value="startValue|dt ISO_FORMAT ''"></input>
-    <input type="hidden" v-el:end-hidden
+    <input type="hidden" ref="end-hidden"
         :id="endId" :name="endId"
         :value="endValue|dt ISO_FORMAT ''"></input>
 </div>
@@ -126,10 +126,10 @@ export default {
             return true;
         }
     },
-    ready() {
+    mounted() {
         // Perform all validations on end field because performing on start field unhighlight.
-        $(this.$els.endHidden).rules('add', {
-            dateGreaterThan: this.$els.startHidden.id,
+        $(this.$refs.endHidden).rules('add', {
+            dateGreaterThan: this.$refs.startHidden.id,
             required: (el) => {
                 return (this.startValue && !this.endValue) || (this.endValue && !this.startValue);
             },

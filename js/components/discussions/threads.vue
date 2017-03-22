@@ -64,13 +64,11 @@
             </ul>
         </div>
     </div>
-    
-    <discussion-thread
-        v-ref:threads
-        v-for="discussion in discussions"
+
+    <discussion-thread ref="threads"
+        v-for="discussion in discussions" :key="discussion.id"
         :discussion="discussion"
-        id="discussion-{{ discussion.id }}"
-        track-by="id">
+        id="discussion-{{ discussion.id }}">
     </discussion-thread>
 
     <!-- New discussion -->
@@ -79,7 +77,7 @@
         <h4 class="list-group-item-heading">{{ _('Start a new discussion') }}</h4>
     </a>
 
-    <div v-el:form id="discussion-create" v-show="formDisplayed" v-if="currentUser"
+    <div ref="form" id="discussion-create" v-show="formDisplayed" v-if="currentUser"
         class="create list-group-item animated">
         <div>
             <div class="avatar">
@@ -95,13 +93,13 @@
                 <h4 class="list-group-item-heading">
                     {{ _('Starting a new discussion thread') }}
                 </h4>
-                
+
                 <p class="list-group-item-text">
                     {{ _("You're about to start a new discussion thread. Make sure that a thread about the same topic doesn't exist yet just above.") }}
                 </p>
             </div>
         </div>
-        <thread-form-create v-ref:form :subject-id="subjectId" :subject-class="subjectClass"></thread-form-create>
+        <thread-form-create ref="form" :subject-id="subjectId" :subject-class="subjectClass"></thread-form-create>
     </div>
 </div>
 </template>
@@ -157,9 +155,9 @@ export default {
             this.discussions.$set(index, discussion);
         }
     },
-    ready() {
+    mounted() {
         this.$api.get('discussions/', {for: this.subjectId}).then(response => {
-            
+
             this.loading = false;
             this.discussions = response.data;
 
@@ -193,8 +191,8 @@ export default {
             this.displayForm()
             // Wait for next tick because the form needs to be visible to scroll
             this.$nextTick(() => {
-                if (this.$els.form && this.$refs.form) { // Avoid logging errors
-                    this.$scrollTo(this.$els.form);
+                if (this.$refs.form && this.$refs.form) { // Avoid logging errors
+                    this.$scrollTo(this.$refs.form);
                     this.$refs.form.prefill(title, comment);
                 }
             })
@@ -244,7 +242,7 @@ export default {
 .discussion-threads {
     .list-group-form {
         height: inherit;
-        
+
         form {
             padding: 1em;
         }

@@ -1,7 +1,7 @@
 <template>
 <div>
 <form-layout icon="book" :title="title" :save="save" :cancel="cancel" footer="true" :model="topic">
-    <topic-form v-ref:form :topic="topic"></topic-form>
+    <topic-form ref="form" :topic="topic"></topic-form>
 </form-layout>
 </div>
 </template>

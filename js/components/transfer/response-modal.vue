@@ -1,7 +1,7 @@
 <template>
 <modal :title="_('Transfer request')"
     class="modal-info transfer-response-modal"
-    v-ref:modal>
+    ref="modal">
 
     <div class="modal-body">
         <div>
@@ -108,7 +108,7 @@ export default {
             });
         }
     },
-    ready() {
+    mounted() {
         API.transfer.get_transfer({id: this.transferid}, (response) => {
             this.transfer = response.obj;
             this.$emit('transfer:loaded');

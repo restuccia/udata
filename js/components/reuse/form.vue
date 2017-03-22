@@ -1,6 +1,6 @@
 <template>
 <div>
-  <vform v-ref:form :fields="fields" :model="reuse"></vform>
+  <vform ref="form" :fields="fields" :model="reuse"></vform>
 </div>
 </template>
 

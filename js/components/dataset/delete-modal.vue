@@ -2,7 +2,7 @@
 <div>
 <modal :title="_('Confirm deletion')"
     class="modal-danger dataset-delete-modal"
-    v-ref:modal>
+    ref="modal">
 
     <div class="modal-body">
         <p class="lead text-center">

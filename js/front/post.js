@@ -17,7 +17,7 @@ import DiscussionThreads from 'components/discussions/threads.vue';
 new Vue({
     mixins: [FrontMixin],
     components: {ShareButton, DiscussionThreads},
-    ready() {
+    mounted() {
         log.debug('Post page ready');
     }
 });

@@ -27,7 +27,7 @@
             @blur="show = false"
             />
     </div>
-    <ul class="dropdown-menu suggestion" v-el:dropdown>
+    <ul class="dropdown-menu suggestion" ref="dropdown">
         <li v-for="group in groupsWithResults" track-by="id" class="result-group">
             <span v-if="group.loading" class="fa fa-spin fa-spinner group-status"></span>
             <strong class="search-header">{{ group.name }}</strong>
