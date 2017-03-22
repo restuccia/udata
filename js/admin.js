@@ -15,10 +15,7 @@ import 'dom-polyfills';
 import 'bootstrap';
 
 import Vue from 'vue';
-import config from 'config';
 import router from 'admin.routes';
-
-Vue.config.debug = config.debug;
 
 Vue.use(require('plugins/util'));
 Vue.use(require('plugins/text'));

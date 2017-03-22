@@ -1,5 +1,5 @@
-var webpack = require('webpack');
-var config = require('./webpack.config');
+const webpack = require('webpack');
+const config = require('./webpack.config');
 
 config.plugins.push(
     new webpack.DefinePlugin({
@@ -23,7 +23,6 @@ config.plugins.push(
         }
     }),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(true)
 );
 
 config.devtool = 'source-map';

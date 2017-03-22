@@ -7,7 +7,7 @@ import 'less/apidoc.less';
 
 import Vue from 'vue';
 
-import $ from 'expose?$!expose?jQuery!jquery';
+import $ from 'expose-loader?$!expose-loader?jQuery!jquery';
 import commonmark from 'helpers/commonmark';
 import hljs from 'hljs';
 import log from 'logger';
@@ -16,14 +16,15 @@ import log from 'logger';
 import 'jquery.browser';
 import 'swaggerui/lib/jquery.slideto.min';
 import 'swaggerui/lib/jquery.wiggle.min';
-import 'script!swaggerui/lib/jquery.ba-bbq.min';
+import 'script-loader!swaggerui/lib/jquery.ba-bbq.min';
 
-import 'script!swaggerui/lib/handlebars-4.0.5';
-import 'script!swaggerui/lib/lodash.min';
-import 'script!swaggerui/lib/backbone-min';
-import 'script!swaggerui/lib/jsoneditor.min';
+// import 'expose-loader?Handlebars!handlebars';
+import 'script-loader!swaggerui/lib/handlebars-4.0.5';
+import 'script-loader!swaggerui/lib/lodash.min';
+import 'script-loader!swaggerui/lib/backbone-min';
+import 'script-loader!swaggerui/lib/jsoneditor.min';
 
-import 'script!swaggerui/swagger-ui.min';
+import 'script-loader!swaggerui/swagger-ui.min';
 SwaggerUi = window.SwaggerUi;
 
 // Marked compatibility for SwaggerUI

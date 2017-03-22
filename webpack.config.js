@@ -5,8 +5,29 @@ const node_path = path.join(__dirname, 'node_modules');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const css_loader = ExtractTextPlugin.extract('vue-style?sourceMap', 'css?sourceMap');
-const less_loader = ExtractTextPlugin.extract('vue-style?sourceMap', 'css?sourceMap!less?sourceMap=source-map-less-inline');
+const css_loader = ExtractTextPlugin.extract({
+    use: [
+        {loader: 'css-loader', options: {sourceMap: true}},
+    ],
+    fallback: 'style-loader',
+});
+const less_loader = ExtractTextPlugin.extract({
+    use: [
+        {loader: 'css-loader', options: {sourceMap: true}},
+        {loader: 'less-loader', options: {sourceMap: true}},
+    ],
+    fallback: 'style-loader',
+});
+const babel_loader = {
+    loader: 'babel-loader',
+    options: {
+        presets: [
+            ['es2015', { 'modules': false }],
+        ],
+        comments: false,
+        plugins: ['transform-runtime']
+    }
+};
 
 const languages = ['en', 'es', 'fr', 'pt'];
 const public_path = '/static/';
@@ -35,53 +56,39 @@ module.exports = {
         chunkFilename: 'chunks/[id].[chunkhash].js'
     },
     resolve: {
-        root: [
+        modules: [
             __dirname,
-            path.join(__dirname, 'js'),
+            path.resolve('js'),
+            path.resolve('node_modules'),
         ],
         alias: {
             'jquery-slimscroll': path.join(node_path, 'jquery-slimscroll/jquery.slimscroll'),
             'swaggerui': 'swagger-ui/dist',
+            // Allow template compiler
+            vue$: 'vue/dist/vue.common.js',
         }
     },
-    devtool: 'eval-source-map',
     module: {
-        loaders: [
+        rules: [
             {test: /\.(jpg|jpeg|png|gif|svg)$/, loader: 'file-loader'},
             {test: /\.css$/, loader: css_loader},
             {test: /\.less$/, loader: less_loader},
-            {test: /\.vue$/, loader: 'vue-loader'},
-            {test: /\.json$/, loader: 'json-loader'},
+            {test: /\.vue$/, loader: 'vue-loader', options: {
+                loaders: {
+                    css: css_loader,
+                    less: less_loader,
+                    js: babel_loader
+                }
+            }},
             {test: /\.(woff|svg|ttf|eot|otf)([\?]?.*)$/, exclude: /img/, loader: 'file-loader?name=[name].[ext]'},
-            {test: /\.js$/, loader: 'babel-loader', include: [
+            {test: /\.js$/, loader: babel_loader, include: [
                     path.resolve(__dirname, 'js'),
                     path.resolve(__dirname, 'node_modules/vue-strap/src'),
                 ]
             }
         ]
     },
-    vue: {
-        loaders: {
-            css: 'vue-style?sourceMap!css?sourceMap',
-            less: 'vue-style?sourceMap!css?sourceMap!less?sourceMap=source-map-less-inline',
-            js: 'babel-loader'
-        }
-    },
-    babel: {
-        presets: ['es2015'],
-        comments: false,
-        plugins: [
-            ['transform-builtin-extend', {globals: ['Error']}],
-            'transform-runtime',
-        ]
-    },
-    // Store initial values for easier inheritance
-    defaults: {
-        languages,
-    },
     plugins: [
-        // Prevent webpack 1.x false positive
-        require('webpack-fail-plugin'),
         // Fix AdminLTE packaging
         new webpack.NormalModuleReplacementPlugin(
             /admin-lte\/build\/img\/boxed-bg\.jpg$/,
@@ -98,6 +105,9 @@ module.exports = {
             publicPath: public_path,
         }),
         new ExtractTextPlugin('[name].[contenthash].css'),
+        new webpack.DefinePlugin({
+            DEBUG: process.env.NODE_ENV !== 'production'
+        }),
         // Only include needed translations
         new webpack.ContextReplacementPlugin(/moment\/locale$/, new RegExp('^' + languages.join('|') + '$')),
         new webpack.ContextReplacementPlugin(/locales$/, new RegExp(languages.join('|'))),
@@ -112,3 +122,36 @@ module.exports = {
         tls: 'empty'
     }
 };
+
+if (process.env.NODE_ENV === 'production') {
+    module.exports.devtool = 'source-map';
+    module.exports.plugins.push(
+        // new webpack.optimize.UglifyJsPlugin({minimize: true, sourceMap: true})
+        new webpack.optimize.UglifyJsPlugin({
+            minimize: true,
+            sourceMap: true,
+            output: {
+                comments: false,
+                screw_ie8: true
+            },
+            mangle: {
+                screw_ie8: true,
+                keep_fnames: true
+            },
+            compress: {
+                warnings: false,
+                screw_ie8: true
+            }
+        }),
+        new webpack.optimize.DedupePlugin()
+    );
+} else {
+    module.exports.devtool = 'eval-source-map';
+    // module.exports.devtool = '#source-map';
+    module.exports.plugins.push(
+        // new webpack.optimize.UglifyJsPlugin({minimize: true, sourceMap: true})
+        new webpack.LoaderOptionsPlugin({
+            debug: true
+        })
+    );
+}
