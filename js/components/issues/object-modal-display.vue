@@ -7,7 +7,7 @@
             </a>
             <div class="media-body">
                 <div class="message text-left">
-                    <p>{{{ comment.content|markdown }}}</p>
+                    <p v-html="comment.content|markdown"></p>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
         <button class="btn btn-info" @click="$dispatch('back')" :disabled="sending">
             <span class="fa fa-step-backward"></span>
             {{ _('Back') }}
-        </button-->
+        </button>
         <button type="button" class="btn btn-default" @click="$dispatch('close')" :disabled="sending">
             <span class="fa fa-times"></span>
             {{ _('Close') }}

@@ -2,10 +2,10 @@
     <div class="alert fade" :class="classes">
         <button type="button" class="close" aria-hidden="true" @click="close">×</button>
         <h4>
-            <span class="icon fa fa-{{alert.icon || 'check'}}"></span>
+            <span class="icon fa" :class="iconClasses"></span>
             {{alert.title}}
         </h4>
-        {{{ details }}}
+        <div v-if="details" v-html="details"></div>
     </div>
 </template>
 
@@ -49,7 +49,7 @@ export default {
             }, TRANSITION_DURATION)
         }
     },
-    ready() {
+    mounted() {
         if (this.alert.autoclose) {
             setTimeout(() => {
                 this.$dispatch('notify:close', this.alert)

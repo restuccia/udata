@@ -22,14 +22,14 @@
         ref="start-input" :placeholder="_('Start')"
         @focus="onFocus" @input="onChange"
         :required="required"
-        :value="startValue|dt dateFormat ''"
+        :value="startValue | dt(dateFormat, '')"
         :readonly="readonly">
     <span class="input-group-addon">{{ _('to') }}</span>
     <input type="text" class="form-control daterange-picker-end"
         ref="end-input" :placeholder="_('End')"
         @focus="onFocus" @input="onChange"
         :required="required"
-        :value="endValue|dt dateFormat ''"
+        :value="endValue | dt(dateFormat, '')"
         :readonly="readonly">
     <span class="input-group-btn">
         <button class="btn btn-danger" type="button" @click.prevent="clear">
@@ -41,10 +41,10 @@
     </div>
     <input type="hidden" ref="start-hidden"
         :id="startId" :name="startId"
-        :value="startValue|dt ISO_FORMAT ''"></input>
+        :value="startValue | dt(ISO_FORMAT, '')"></input>
     <input type="hidden" ref="end-hidden"
         :id="endId" :name="endId"
-        :value="endValue|dt ISO_FORMAT ''"></input>
+        :value="endValue | dt(ISO_FORMAT, '')"></input>
 </div>
 </template>
 

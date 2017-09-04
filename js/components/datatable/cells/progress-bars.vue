@@ -1,6 +1,6 @@
 <template>
 <div class="progress progress-sm">
-    <span class="progress-bar progress-bar-{{ progress_class }}"
+    <span class="progress-bar" :class="progress_class"
         :style="{width: value + 1 + '0%'}"
         :title="_('Score:') + ' ' + value">
     </span>
@@ -11,18 +11,18 @@
 export default {
     name: 'datatable-cell-progress-bars',
     computed: {
-        progress_class: function() {
+        progress_class() {
             if (this.value < 2) {
-                return 'danger';
+                return ['progress-bar-danger'];
             }
             else if (this.value < 5) {
-                return 'warning';
+                return ['progress-bar-warning'];
             }
             else if (this.value < 9) {
-                return 'primary';
+                return ['progress-bar-primary'];
             }
             else {
-                return 'success';
+                return ['progress-bar-success'];
             }
         }
     }

@@ -17,7 +17,7 @@
                     <td>{{client.name}}</td>
                     <td>{{client.description}}</td>
                     <td>
-                        <i class="fa fa-fw fa-{{client.enabled ? 'play' : 'stop'}} text-{{client.enabled ? 'green' : 'red'}}"></i>
+                        <i class="fa fa-fw" :class="iconClasses"></i>
                     </td>
                 </tr>
             </tbody>
@@ -37,6 +37,14 @@ export default {
             title: 'OAuth',
             clients: []
         };
+    },
+    computed: {
+        iconClasses() {
+            return [
+                client.enabled ? 'fa-play' : 'fa-stop',
+                client.enabled ? 'text-green' : 'text-red'
+            ];
+        }
     }
 };
 </script>

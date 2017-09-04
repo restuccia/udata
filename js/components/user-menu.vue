@@ -16,7 +16,7 @@
             <img :src="$root.me | avatar_url 90" class="img-circle" alt="User Image" />
             <p>
                 {{$root.me.fullname}}
-                <small><span v-i18n="Member since"></span> {{ $root.me.since | dt LL}}</small>
+                <small><span>{{ _('Member since') }}</span> {{ $root.me.since | dt('LL')}}</small>
             </p>
         </li>
         <!-- Menu Body -->
@@ -27,10 +27,14 @@
         <!-- Menu Footer-->
         <li class="user-footer">
             <div class="pull-left">
-                <a :href="'/users/' + $root.me.slug" class="btn btn-default btn-flat" v-i18n="Profile"></a>
+                <a :href="'/users/' + $root.me.slug" class="btn btn-default btn-flat">
+                    {{ _('Profile') }}
+                </a>
             </div>
             <div class="pull-right">
-                <a href="/logout" class="btn btn-default btn-flat" v-i18n="Sign out"></a>
+                <a href="/logout" class="btn btn-default btn-flat">
+                    {{  _('Sign out') }}
+                </a>
             </div>
         </li>
     </ul>

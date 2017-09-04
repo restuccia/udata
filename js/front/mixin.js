@@ -67,7 +67,7 @@ export default {
 };
 
 // Expose the uData global
-require('expose?uData!udata');
+require('expose-loader?uData!udata');
 
 // Legacy common widgets and helpers (still to be ported)
 import 'legacy';

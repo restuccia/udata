@@ -1,5 +1,5 @@
 <template>
-<span class="label label-{{type}}">{{text}}</span>
+<span class="label" :class="classes">{{text}}</span>
 </template>
 
 <script>
@@ -23,17 +23,17 @@ const VISIBILITIES = {
 export default {
     name: 'datatable-cell-visibility',
     computed: {
-        type: function() {
+        classes() {
             if (!this.item) return;
             if (this.item.deleted) {
-                return VISIBILITIES.deleted.type;
+                return [`label-${VISIBILITIES.deleted.type}`];
             } else if (this.item.private) {
-                return VISIBILITIES.private.type;
+                return [`label-${VISIBILITIES.private.type}`];
             } else {
-                return VISIBILITIES.public.type;
+                return [`label-${VISIBILITIES.public.type}`];
             }
         },
-        text: function() {
+        text() {
             if (!this.item) return;
             if (this.item.deleted) {
                 return VISIBILITIES.deleted.label;

@@ -37,7 +37,7 @@
     </div>
     <div v-if="can_edit && member_exists" class="btn-group btn-group-justified">
         <div class="btn-group">
-            <button type="button" class="btn btn-danger btn-flat" @click="delete">
+            <button type="button" class="btn btn-danger btn-flat" @click="deleteMember">
                 <span class="fa fa-user-times"></span>
                 {{ _('Delete') }}
             </button>
@@ -87,7 +87,7 @@ export default {
         this.user.fetch(this.member.user.id);
     },
     methods: {
-        delete() {
+        deleteMember() {
             API.organizations.delete_organization_member(
                 {org: this.org.id, user: this.user.id},
                 this.on_deleted.bind(this)

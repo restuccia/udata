@@ -78,7 +78,7 @@
 </style>
 <template>
 <div>
-<modal v-ref:modal class="user-modal" small>
+<modal ref="modal" class="user-modal" small>
     <div class="user-details" slot="modal-content">
         <img class="img-circle"
             :src="user | avatar_url 100"
@@ -91,7 +91,7 @@
             </button>
             <div class="user-heading">
                 <h3>{{user.fullname}}</h3>
-                <span class="help-block">{{{ user.about | markdown }}}</span>
+                <span class="help-block" v-html="user.about | markdown"></span>
             </div>
             <ul class="user-actions clearfix">
                 <li>

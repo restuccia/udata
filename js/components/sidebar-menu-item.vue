@@ -21,15 +21,15 @@
 
 <template>
 <li :class="{'treeview': children, 'active': active}">
-    <a href="" @click.prevent="click">
+    <a href @click.prevent="click">
         <i v-if="icon" class="fa fa-fw fa-{{icon}}"></i>
         <img v-if="image" :src="image" />
         <span>{{ label | truncate 25 }}</span>
-        <i v-if="is_tree" class="fa fa-angle-left pull-right"></i>
-        <small v-if="badge" class="badge pull-right bg-{{badge-color}}">{{badge.label}}</small>
+        <i v-if="is_tree" class="fa pull-right" :class="angleClasses"></i>
+        <small v-if="badge" class="badge pull-right" :class="badgeClasses">{{badge.label}}</small>
     </a>
     <ul v-if="is_tree" v-show="active" class="treeview-menu">
-        <sidebar-menu-item v-for="item in children"
+        <sidebar-menu-item v-for="(item, index) in children" :key="index"
             :label="item.label"
             :icon="item.icon"
             :image="item.image"
@@ -52,6 +52,15 @@ export default {
         },
         active() {
             return this.$route.path === this.route;
+        },
+        iconClasses() {
+            return [`fa-${this.icon}`];
+        },
+        angleClasses() {
+            return [this.active ? 'fa-angle-down' : 'fa-angle-left'];
+        },
+        badgeClasses() {
+            return [`bg-${this.badge.color}`];
         }
     },
     methods: {

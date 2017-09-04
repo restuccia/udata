@@ -10,7 +10,7 @@
             <ul class="menu">
                 <li v-for="action in actions">
                     <a v-link="action.route">
-                        <span class="fa fa-fw {{action.icon}} text-{{action.color}}"></span>
+                        <span class="fa fa-fw" :class="actionClasses(action)"></span>
                         <span>{{ action.label }}</span>
                     </a>
                 </li>
@@ -61,6 +61,11 @@ export default {
                 });
             }
             return actions;
+        }
+    },
+    methods: {
+        actionClasses(action) {
+            return [action.icon, `text-${action.color}`];
         }
     }
 };

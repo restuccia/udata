@@ -5,9 +5,11 @@
 </style>
 
 <template>
-<span v-for="label in labels" class="label label-{{label | color}}">
+<div>
+<span v-for="label in labels" class="label" :class="labelClass(label)">
     {{label | format}}
 </span>
+</div>
 </template>
 
 <script>
@@ -18,18 +20,20 @@ export default {
             return this.field.hasOwnProperty('label_func')
                 ? this.field.label_func(value)
                 : value;
-        },
-        color(value) {
-            return this.field.hasOwnProperty('label_type')
-                ? this.field.label_type(value)
-                : 'default'
-        },
+        }
     },
     computed: {
         labels() {
             return this.value instanceof Array
                 ? this.value
                 : [this.value]
+        }
+    },
+    methods: {
+        labelClass(label) {
+            return [this.field.hasOwnProperty('label_type')
+                ? `label-${this.field.label_type(value)}`
+                : 'label-default'];
         }
     }
 };
