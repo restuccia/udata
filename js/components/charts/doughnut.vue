@@ -10,7 +10,7 @@ import Chart from 'chart.js';
 export default {
     name: 'chartjs-doughnut',
     props: ['score'],
-    ready() {
+    mounted() {
         this.build_chart()
     },
     methods: {

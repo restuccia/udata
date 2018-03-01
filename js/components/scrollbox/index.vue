@@ -153,7 +153,7 @@ export default {
         }
     },
 
-    ready() {
+    mounted() {
         this.calculateSize();
         // Attach The Event for Responsive View~
         window.addEventListener('resize', this.calculateSize);

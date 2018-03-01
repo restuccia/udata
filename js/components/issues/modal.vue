@@ -15,10 +15,10 @@
     <div class="modal-body">
         <div class="row">
             <dataset-card class="col-xs-12 col-md-offset-3 col-md-6"
-                v-if="issue.subject | is 'dataset'"
+                v-if="issue.subject | is('dataset')"
                 :datasetid="issue.subject.id"></dataset-card>
             <reuse-card class="col-xs-12 col-md-offset-3 col-md-6"
-                v-if="issue.subject | is 'reuse'"
+                v-if="issue.subject | is('reuse')"
                 :reuseid="issue.subject.id"></reuse-card>
         </div>
         <h3>{{ issue.title }}</h3>
@@ -30,7 +30,7 @@
                     <span class="direct-chat-timestamp pull-right">{{message.posted_on | dt}}</span>
                 </div>
                 <img class="direct-chat-img"  :alt="_('User Image')"
-                    :src="message.posted_by | avatar_url 40"/>
+                    :src="message.posted_by | avatar_url(40)"/>
                 <div class="direct-chat-text" v-markdown="message.content"></div>
             </div>
         </div>

@@ -4,15 +4,15 @@
         <i class="fa fa-plus"></i>
     </a>
     <ul class="dropdown-menu">
-        <li class="header text-center" v-i18n="Add"></li>
+        <li class="header text-center">{{ _('Add') }}</li>
         <li>
             <!-- inner menu: contains the actual data -->
             <ul class="menu">
-                <li v-for="action in actions">
-                    <a v-link="action.route">
+                <li v-for="action in actions" :key="action.route">
+                    <router-link :to="action.route">
                         <span class="fa fa-fw" :class="actionClasses(action)"></span>
                         <span>{{ action.label }}</span>
-                    </a>
+                    </router-link>
                 </li>
             </ul>
         </li>

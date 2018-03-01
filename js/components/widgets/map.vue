@@ -31,7 +31,7 @@
 <template>
     <div class="box box-solid bg-light-blue-gradient map-widget">
         <header class="box-header" v-show="title || icon">
-            <i v-show="icon" class="fa fa-{{icon}}"></i>
+            <i v-show="icon" :class="`fa fa-${icon}`"></i>
             <h3 class="box-title">{{title}}</h3>
             <div class="box-tools"></div>
         </header>

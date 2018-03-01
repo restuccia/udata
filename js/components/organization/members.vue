@@ -73,7 +73,7 @@
         <div class="col-xs-4 col-lg-3 text-center user-face" v-for="member in org.members">
             <a class="pointer" @click="member_click(member)">
                 <img class="img-circle" :alt="_('User Image')"
-                    :src="member.user | avatar_url 60"/>
+                    :src="member.user | avatar_url(60)"/>
                 <strong>{{member.user | display}}</strong>
                 <small class="text-muted">{{member.role}}</small>
             </a>
@@ -90,7 +90,7 @@
                 <span class="direct-chat-timestamp pull-right">{{request.created_at | dt}}</span>
             </div>
             <img class="direct-chat-img"  :alt="_('User Image')"
-                :src="request.user | avatar_url 40"/>
+                :src="request.user | avatar_url(40)"/>
             <div class="direct-chat-text">
                 {{ request.comment }}
                 <div class="btn-group btn-group-xs pull-right">

@@ -194,7 +194,7 @@ export default {
             return this.setImage(src);
         }
     },
-    ready() {
+    mounted() {
         this.setImage(this.src);
     }
 };

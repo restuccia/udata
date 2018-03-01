@@ -22,7 +22,7 @@
         <div v-if="main_action" class="btn-group btn-group-sm btn-actions pull-right clearfix">
             <div v-if="menu_actions" class="btn-group btn-group-sm" role="group">
                 <button type="button" class="btn btn-info" @click="main_action.method">
-                    <span v-if="main_action.icon" class="fa fa-fw fa-{{main_action.icon}}"></span>
+                    <span v-if="main_action.icon" :class="`fa fa-fw fa-${main_action.icon}`"></span>
                     {{main_action.label}}
                 </button>
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
@@ -30,13 +30,13 @@
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                    <li v-for="action in menu_actions"
+                    <li v-for="(action, idx) in menu_actions" :key="idx"
                          :role="action.divider ? 'separator' : false"
                          :class="{ 'divider': action.divider }">
                         <a class="pointer"
                             v-if="!action.divider"
                             @click="action.method" >
-                            <span v-if="action.icon" class="fa fa-fw fa-{{action.icon}}"></span>
+                            <span v-if="action.icon" :class="`fa fa-fw fa-${action.icon}`"></span>
                             {{action.label}}
                         </a>
                     </li>
@@ -44,7 +44,7 @@
             </div>
             <button v-if="!menu_actions" type="button" class="btn btn-info btn-sm"
                     @click="main_action.method">
-                <span v-if="main_action.icon" class="fa fa-fw fa-{{main_action.icon}}"></span>
+                <span v-if="main_action.icon" :class="`fa fa-fw fa-${main_action.icon}`"></span>
                 {{main_action.label}}
             </button>
         </div>
@@ -57,8 +57,8 @@
 
             <small v-if="subtitle">{{subtitle}}</small>
             <small v-if="badges">
-                <span v-for="badge in badges"
-                    class="label label-{{badge.class}}">{{badge.label}}</span>
+                <span v-for="(badge, idx) in badges" :key="idx"
+                    :class="`label label-${badge.class}`">{{badge.label}}</span>
             </small>
         </h1>
     </section>

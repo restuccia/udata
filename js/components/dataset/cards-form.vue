@@ -76,7 +76,7 @@
             :data-id="datasetid">
             <button type="button" class="close" @click="on_remove(datasetid)">
                 <span aria-hidden="true">&times;</span>
-                <span class="sr-only" v-i18n="Remove"></span>
+                <span class="sr-only">{{ _('Remove') }}</span>
             </button>
             <card :datasetid="datasetid"></card>
         </div>

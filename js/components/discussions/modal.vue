@@ -20,10 +20,10 @@
     <div class="modal-body" v-show="!deleting">
         <div class="row card-container">
             <dataset-card class="col-xs-12 col-md-offset-3 col-md-6"
-                v-if="discussion.subject | is 'dataset'"
+                v-if="discussion.subject | is('dataset')"
                 :datasetid="discussion.subject.id"></dataset-card>
             <reuse-card class="col-xs-12 col-md-offset-3 col-md-6"
-                v-if="discussion.subject | is 'reuse'"
+                v-if="discussion.subject | is('reuse')"
                 :reuseid="discussion.subject.id"></reuse-card>
         </div>
         <h3>{{ discussion.title }}</h3>
@@ -35,7 +35,7 @@
                     <span class="direct-chat-timestamp pull-right">{{message.posted_on | dt}}</span>
                 </div>
                 <img class="direct-chat-img"  :alt="_('User Image')"
-                    :src="message.posted_by | avatar_url 40"/>
+                    :src="message.posted_by | avatar_url(40)"/>
                 <div class="direct-chat-text" v-markdown="message.content"></div>
             </div>
         </div>
@@ -76,7 +76,7 @@
     </footer>
     <footer class="modal-footer text-center" v-show="deleting">
         <button type="button" class="btn btn-warning btn-flat pull-left"
-            @click="delete">
+            @click="perform_delete">
             {{ _('Confirm') }}
         </button>
         <button type="button" class="btn btn-danger btn-flat"
@@ -141,7 +141,7 @@ export default {
         cancel_delete() {
             this.deleting = false;
         },
-        delete() {
+        perform_delete() {
             API.discussions.delete_discussion({id: this.discussion.id},
                 (response) => {
                     this.$refs.modal.close();

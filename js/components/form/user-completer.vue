@@ -6,7 +6,7 @@ import BaseCompleter from 'components/form/base-completer.vue';
 
 const template = `<div class="selectize-option">
     <div class="logo pull-left">
-        <img src="{{ user | avatar_url 32 }}"/>
+        <img src="{{ user | avatar_url(32) }}"/>
     </div>
     {{user.first_name}} {{user.last_name}}
 </div>`;

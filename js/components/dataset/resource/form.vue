@@ -100,7 +100,7 @@
 <template>
 <div>
     <form-horizontal v-if="hasData" class="resource-form file-resource-form"
-        :fields="fields" :model="resource" v-ref:form>
+        :fields="fields" :model="resource" ref="form">
     </form-horizontal>
     <div v-show="files.length" v-for="file in files" class="info-box bg-aqua">
         <span class="info-box-icon">

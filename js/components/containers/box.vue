@@ -68,21 +68,21 @@
 
 </style>
 <template>
-    <div class="box {{ boxclass }}">
+    <div :class="`box ${boxclass}`">
         <header class="box-header" v-show="title || icon">
-            <i v-show="icon" class="fa fa-{{icon}}"></i>
+            <i v-show="icon" :class="`fa fa-${icon}`"></i>
             <h3 class="box-title">{{title}}</h3>
             <div class="box-tools">
                 <slot name="tools"></slot>
             </div>
         </header>
-        <div class="box-body {{bodyclass}}">
+        <div :class="`box-body ${bodyclass}`">
             <slot></slot>
         </div>
         <div class="overlay" v-show="loading">
             <span class="fa fa-refresh fa-spin"></span>
         </div>
-        <div class="box-footer clearfix {{footerclass}}" v-show="footer">
+        <div :class="`box-footer clearfix ${footerclass}`" v-show="footer">
             <slot name="footer"></slot>
         </div>
     </div>

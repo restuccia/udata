@@ -7,9 +7,9 @@
             <div class="modal-header">
                 <button type="button" class="close" @click="close">
                     <span aria-hidden="true">&times;</span>
-                    <span class="sr-only" v-i18n="Close"></span>
+                    <span class="sr-only">{{ _('Close') }}</span>
                 </button>
-                <h4 class="modal-title" id="modal-title">{{{title}}}</h4>
+                <h4 class="modal-title" id="modal-title" v-html="title"></h4>
             </div>
             <slot></slot>
         </div>
@@ -30,7 +30,7 @@ export default {
         large: {type: Boolean, default: false},
         visible: {type: Boolean, default: true},
     },
-    ready() {
+    mounted() {
         this.setVisiblity(this.visible);
     },
     methods: {

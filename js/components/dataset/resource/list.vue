@@ -54,7 +54,7 @@
                 </tr>
             </thead>
             <tbody ref="sortable">
-                <tr v-for="file in files" track-by="id">
+                <tr v-for="file in files" :key="file.id">
                     <td v-if="reordering"></td>
                     <td>
                         <div class="ellipsis">{{ file.name }}</div>
@@ -65,11 +65,12 @@
                     <td colspan="2">
                         <div class="progress progress-xs progress-striped active">
                             <div class="progress-bar progress-bar-primary"
-                                id="progress-{{file.id}}" style="width: 0%"></div>
+                                :id="progressId(file)" style="width: 0%"></div>
                         </div>
                     </td>
                 </tr>
-                <tr v-for="resource in dataset.resources" @click="display(resource)"
+                <tr v-for="resource in dataset.resources" :key="resource.id"
+                    @click="display(resource)"
                     :class="{ 'pointer': !reodering, 'move': reordering }"
                     :data-id="resource.id">
                     <td v-if="reordering" class="handle">
@@ -92,7 +93,7 @@
                     </td>
                 </tr>
                 <tr v-if="!(dataset && dataset.resources)" class="text-center lead">
-                    <td colspan="3" v-i18n="No resources"></td>
+                    <td colspan="3">{{ _('No resources') }}</td>
                 </tr>
             </tbody>
         </table>
@@ -105,26 +106,26 @@
                 v-show="!reordering"
                 @click="on_new">
                 <span class="fa fa-fw fa-plus"></span>
-                <span v-i18n="Add"></span>
+                <span>{{ _('Add') }}</span>
             </button>
             <button type="button"
                 class="btn btn-primary btn-sm btn-flat pointer"
                 v-show="!reordering && dataset.resources && dataset.resources.length > 1"
                 @click="reorder">
                 <span class="fa fa-fw fa-sort"></span>
-                <span v-i18n="Reorder"></span>
+                <span>{{ _('Reorder') }}</span>
             </button>
             <button type="button" class="btn btn-success btn-sm btn-flat pointer"
                 v-show="reordering"
                 @click="reorder_done(true)">
                 <span class="fa fa-fw fa-check"></span>
-                <span v-i18n="Apply"></span>
+                <span>{{ _('Apply') }}</span>
             </button>
             <button type="button" class="btn btn-warning btn-sm btn-flat pointer"
                 v-show="reordering"
                 @click="reorder_done(false)">
                 <span class="fa fa-fw fa-times"></span>
-                <span v-i18n="Cancel"></span>
+                <span>{{ _('Cancel') }}</span>
             </button>
         </footer>
     </box>
@@ -214,6 +215,9 @@ export default {
                     oid: this.dataset.id, rid: resource.id
                 }});
             }
+        },
+        progressId(file) {
+            return `progress-${file.id}`;
         }
     },
     sortable: {

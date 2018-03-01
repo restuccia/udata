@@ -2,11 +2,11 @@
 <a class="card user-card" :class="{ selected: selected }" :title="user | display"
     :href="clickable" @click.prevent="click">
     <div class="card-logo">
-        <img :alt="user | display" :src="user | avatar_url 60">
+        <img :alt="user | display" :src="user | avatar_url(60)">
     </div>
     <div class="card-body">
         <h4>{{ user | display }}</h4>
-        <div class="clamp-3">{{{ user.about | markdown 180 }}}</div>
+        <div class="clamp-3" v-html="user.about | markdown(180)"></div>
     </div>
 
     <footer v-if="user.metrics" class="card-footer">

@@ -11,13 +11,13 @@
             v-el:start-input :placeholder="_('Start')"
             @focus="onFocus" @input="onChange | debounce 500"
             :required="required"
-            :value="currentMin|dt DATE_FORMAT ''">
+            :value="currentMin | dt(DATE_FORMAT, '')">
         <span class="input-group-addon">{{ _('to') }}</span>
         <input type="text" class="input-sm form-control"
             v-el:end-input :placeholder="_('End')"
             @focus="onFocus" @input="onChange | debounce 500"
             :required="required"
-            :value="currentMax|dt DATE_FORMAT ''">
+            :value="currentMax | dt(DATE_FORMAT, '')">
     </div>
     <calendar v-ref:calendar v-show="picking" :selected="currentValue" :min="dateMin" :max="dateMax"></calendar>
     <div class="row" v-show="changed && !picking">

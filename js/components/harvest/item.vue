@@ -22,7 +22,7 @@
             <dt>{{ _('Ended at') }}</dt>
             <dd>{{ item.ended | dt }}</dd>
             <dt>{{ _('Status') }}</dt>
-            <dd><span class="label label-{{ item.status | statusClass }}">{{ item.status | statusI18n }}</span></dd>
+            <dd><span class="label" :class="statusClass">{{ item.status | statusI18n }}</span></dd>
             <dt v-if="item.dataset">{{ _('Dataset') }}</dt>
             <dd v-if="item.dataset">
                 <dataset-card class="col-xs-12" clickable
@@ -37,7 +37,7 @@
             <dt v-if="item.errors.length">{{ _('Errors') }}</dt>
             <dd v-if="item.errors.length">
                 <div v-for="error in item.errors">
-                    {{{error.message | markdown}}}
+                    <div v-html="error.message | markdown"></div>
                     <pre>{{error.details}}</pre>
                 </div>
             </dd>
@@ -63,15 +63,17 @@ export default {
     props: {
         item: Object,
     },
+    computed: {
+        statusClass() {
+            return `label-${STATUS_CLASSES[this.item.status]}`;
+        }
+    },
     events: {
         'dataset:clicked': function(dataset) {
             document.location = dataset.page;
         }
     },
     filters: {
-        statusClass(value) {
-            return STATUS_CLASSES[value];
-        },
         statusI18n(value) {
             return STATUS_I18N[value];
         }

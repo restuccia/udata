@@ -7,7 +7,7 @@
 </style>
 
 <template>
-<img :src="value | avatar_url field.width" :width="field.width" :height="field.width" />
+<img :src="value | avatar_url(field.width)" :width="field.width" :height="field.width" />
 </template>
 
 <script>

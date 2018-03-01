@@ -3,7 +3,7 @@
 <form-layout icon="user" :title="_('Edit profile')" :save="save" :cancel="cancel" footer="true" :model="me">
     <user-form ref="form" :user="me"></user-form>
 </form-layout>
-<div>
+</div>
 </template>
 
 <script>

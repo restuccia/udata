@@ -75,7 +75,7 @@
                     v-if="editing"
                     @click="on_remove(dataset)">
                     <span aria-hidden="true">&times;</span>
-                    <span class="sr-only" v-i18n="Close"></span>
+                    <span class="sr-only">{{ _('Close') }}</span>
                 </button>
                 <dataset-card :dataset="dataset"></dataset-card>
             </div>

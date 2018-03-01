@@ -7,7 +7,7 @@
         :loading="source.loading || jobs.loading"
         :empty="_('No job yet')">
         <header slot="header">
-            {{{ source.description | markdown }}}
+            <div v-markdown="source.description"></div>
             <dl class="dl-horizontal">
                 <dt>{{ _('Backend') }}</dt>
                 <dd>{{ source.backend }}</dd>

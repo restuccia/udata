@@ -216,6 +216,7 @@ router.map({
         }
     },
     '/topic/new/': {
+        name: 'topic-new',
         component(resolve) {
             require(['./views/topic-wizard.vue'], resolve);
         }

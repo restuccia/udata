@@ -63,7 +63,7 @@ new Vue({
             this.switchLevel(level);
         }
     },
-    ready() {
+    mounted() {
         this.map.spin(true);
         this.$api.get('spatial/levels').then(this.onLevelsLoaded);
         log.debug('Coverage map ready');

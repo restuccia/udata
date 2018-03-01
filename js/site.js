@@ -6,7 +6,7 @@
 require('../less/site.less');
 
 // ES6 environment
-import 'babel-polyfill';
+import '@babel/polyfill';
 
 // Catch all errors
 // require('raven');

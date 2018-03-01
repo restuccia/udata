@@ -71,11 +71,9 @@
                 v-for="reuse in (editing ? sorted : reuses)"
                 :key="reuse.id" :data-id="reuse.id"
             >
-                <button type="button" class="close"
-                    v-if="editing"
-                    @click="on_remove(reuse)">
+                <button type="button" class="close" v-if="editing" @click="on_remove(reuse)">
                     <span aria-hidden="true">&times;</span>
-                    <span class="sr-only" v-i18n="Close"></span>
+                    <span class="sr-only">{{ _('Close') }}</span>
                 </button>
                 <reuse-card :reuse="reuse"></reuse-card>
             </div>

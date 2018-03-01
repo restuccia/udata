@@ -89,7 +89,7 @@ export default {
         }
     },
 
-    ready() {
+    mounted() {
         this.calculateSize()
         // Attach the Listener
         document.addEventListener("mousemove", this.onDrag);

@@ -1,15 +1,15 @@
 <template>
 <li class="dropdown notifications-menu">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <a href class="dropdown-toggle" data-toggle="dropdown">
         <i class="fa fa-envelope-o"></i>
         <span v-if="notifications.length > 0"
             class="label label-warning">{{notifications.length}}</span>
     </a>
     <ul class="dropdown-menu">
-        <li class="header text-center" v-i18n="Notifications"></li>
+        <li class="header text-center">{{ _('Notifications') }}</li>
         <li>
             <ul class="menu">
-                <li v-for="notification in notifications">
+                <li v-for="notification in notifications" :key="notification.details">
                     <component :is="notification.type"
                         :details="notification.details"></component>
                 </li>

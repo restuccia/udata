@@ -2,7 +2,7 @@
 <modal class="resource-modal" ref="modal" :title="resource.title">
 
     <div class="modal-body">
-        {{{ resource.description|markdown }}}
+        <div v-markdown="resource.description"></div>
 
         <dl class="dl-horizontal dl-wide">
           <dt>{{ _('URL') }}</dt>

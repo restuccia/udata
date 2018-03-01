@@ -15,7 +15,7 @@
                     v-model="comment">
                 </textarea>
             </div>
-        </div>
+        </form>
     </div>
 
     <footer class="modal-footer text-center">

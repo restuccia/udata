@@ -1,6 +1,6 @@
 <template>
 <div class="calendar" :class="[ 'view' ]">
-    <div class="calendar-{{view}}">
+    <div :class="`calendar-${view}`">
         <nav>
             <button class="prev" @click.prevent="previous" :disabled="previousDisabled">
                 <span class="fa fa-chevron-left"></span>
@@ -12,23 +12,25 @@
         </nav>
         <main v-if="view == 'days'" class="days">
             <header>
-                <span class="dow" v-for="day in days">{{ day }}</span>
+                <span class="dow" v-for="day in days" :key="day">{{ day }}</span>
             </header>
-            <div v-for="week in monthDays(current)">
-                <button v-for="day in week" class="day" :class="dayClasses(day)"
+            <div v-for="(week, idx) in monthDays(current)" :key="idx">
+                <button v-for="day in week" :key="day" class="day" :class="dayClasses(day)"
                     @click.prevent="pickDay(day)" :disabled="isDisabled(day)">
                     {{ day.date() }}
                 </button>
             </div>
         </main>
         <main v-if="view == 'months'" class="months">
-            <button v-for="(idx, month) in months" class="month" @click.prevent="pickMonth(idx)"
+            <button v-for="(idx, month) in months" :key="month"
+                class="month" @click.prevent="pickMonth(idx)"
                 :disabled="isMonthDisabled(idx)">
                 {{ month }}
             </button>
         </main>
         <main v-if="view == 'years'" class="years">
-            <button v-for="year in yearsRange" class="year" @click.prevent="pickYear(year)"
+            <button v-for="year in yearsRange" :key="year" class="year"
+                @click.prevent="pickYear(year)"
                 :disabled="isYearDisabled(year)">
                 {{ year }}
             </button>

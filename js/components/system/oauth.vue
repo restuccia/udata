@@ -6,14 +6,13 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th v-i18n="Name"></th>
-                    <th v-i18n="Description"></th>
+                    <th>{{ _('Name') }}</th>
+                    <th>{{ _('Description') }}</th>
                     <th width="20px"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="client in clients"
-                    v-link="'/oauth/clients/' + client.id + '/'">
+                <tr v-for="client in clients" :key="client.id" @click="display(client)">
                     <td>{{client.name}}</td>
                     <td>{{client.description}}</td>
                     <td>
@@ -44,6 +43,9 @@ export default {
                 client.enabled ? 'fa-play' : 'fa-stop',
                 client.enabled ? 'text-green' : 'text-red'
             ];
+        },
+        display(client) {
+            this.$router.push({name: 'oauth-client', params: {id: client.id}});
         }
     }
 };

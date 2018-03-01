@@ -5,8 +5,8 @@
         <img :alt="reuse.title" :src="reuse.image">
     </div>
     <div class="card-body">
-        <h4>{{ reuse.title | truncate 100 }}</h4>
-        <div class="clamp-3">{{{ reuse.description | markdown 120 }}}</div>
+        <h4>{{ reuse.title | truncate(100) }}</h4>
+        <div class="clamp-3" v-html="reuse.description | markdown(120)"></div>
     </div>
 
     <footer class="card-footer">
@@ -116,7 +116,7 @@ export default {
             this.fetch();
         }
     },
-    ready() {
+    mounted() {
         this.fetch();
     }
 };

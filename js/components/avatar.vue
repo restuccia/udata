@@ -1,6 +1,6 @@
 <template>
 <a class="avatar" :href="user.url" :title="user | display">
-    <img class="avatar" :src="user | avatar_url size"
+    <img class="avatar" :src="user | avatar_url(size)"
         :alt="user | display" :width="size" :height="size">
 </a>
 </template>

@@ -19,7 +19,7 @@
             </div>
             <!-- End form -->
             <ul class="sidebar-menu">
-                <sidebar-menu-item v-for="item in menu"
+                <sidebar-menu-item v-for="item in menu" :key="item.route"
                     :label="item.label"
                     :icon="item.icon"
                     :image="item.image"
@@ -131,7 +131,7 @@ export default {
             });
         }
     },
-    ready() {
+    mounted() {
         this.$refs.scrollbox.calculateSize();
     },
     methods: {

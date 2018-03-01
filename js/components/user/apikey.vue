@@ -16,7 +16,7 @@
             @click="generate">{{ _('Generate an API KEY') }}</button>
     </footer>
 </box>
-<div>
+</div>
 </template>
 
 <script>

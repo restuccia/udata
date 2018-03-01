@@ -16,8 +16,8 @@
         <div v-if="dataset.keywords && dataset.keywords.length">
             <h4>{{ _('Tags') }}</h4>
             <div class="label-list tags">
-                <a v-for="keyword in dataset.keywords"
-                    href="/search?tag={{keyword}}"
+                <a v-for="keyword in dataset.keywords" :key="keyword"
+                    :href="tagUrl(keyword)"
                     class="label label-default"
                     :title="keyword">
                     {{ keyword }}
@@ -35,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="extra in dataset.extras">
+                    <tr v-for="extra in dataset.extras" :key="extra.name">
                         <td>{{ extra.name }}</td>
                         <td>{{ extra.value }}</td>
                     </tr>
@@ -59,6 +59,11 @@ export default {
     props: {
         dataset: Object
     },
-    components: {Modal}
+    components: {Modal},
+    methods: {
+        tagUrl(tag) {
+            return `/search?tag=${tag}`;
+        }
+    }
 };
 </script>

@@ -81,13 +81,13 @@
 <modal ref="modal" class="user-modal" small>
     <div class="user-details" slot="modal-content">
         <img class="img-circle"
-            :src="user | avatar_url 100"
+            :src="user | avatar_url(100)"
             :alt="user.fullname"
             :title="user.fullname"/>
         <div class="user-info-block">
             <button type="button" class="close" @click="$refs.modal.close">
                 <span aria-hidden="true">&times;</span>
-                <span class="sr-only" v-i18n="Close"></span>
+                <span class="sr-only">{{ _('Close') }}</span>
             </button>
             <div class="user-heading">
                 <h3>{{user.fullname}}</h3>

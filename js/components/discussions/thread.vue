@@ -19,6 +19,7 @@
     }
 }
 </style>
+
 <template>
 <div class="discussion-thread panel panel-default">
     <div class="panel-heading" @click="toggleDiscussions">

@@ -13,7 +13,7 @@
 
     <div class="card-body">
         <h4>{{ dataset.full_title | truncate 80 }}</h4>
-        <div class="clamp-3">{{{ dataset.description | markdown 180 }}}</div>
+        <div class="clamp-3" v-html="dataset.description | markdown 180"></div>
     </div>
 
     <footer class="card-footer">
@@ -115,7 +115,7 @@ export default {
             this.fetch();
         }
     },
-    ready() {
+    mounted() {
         this.fetch();
     }
 };

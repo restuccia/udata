@@ -118,7 +118,7 @@ export default {
             this.$go({name: 'harvester', params: {oid: harvester.id}});
         }
     },
-    ready() {
+    mounted() {
         if (this.owner instanceof Model) {
             // Only fetch if binding occured and object is already fetched, else wait for watch
             if (this.owner.id) {

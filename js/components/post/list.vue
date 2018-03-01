@@ -6,11 +6,11 @@
         :p="posts"
         :empty="_('No post')">
         <footer slot="footer">
-            <button type="button" class="btn btn-primary btn-flat btn-sm"
-                v-link="{name: 'post-new'}">
+            <router-link :to="{name: 'post-new'}" tag="button" type="button"
+                class="btn btn-primary btn-flat btn-sm">
                 <span class="fa fa-fw fa-plus"></span>
-                <span v-i18n="New"></span>
-            </button>
+                <span>{{ _('New') }}</span>
+            </router-link>
         </footer>
     </datatable>
 </div>

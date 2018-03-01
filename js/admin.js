@@ -7,7 +7,7 @@ import 'less/admin.less';
 import 'raven';
 
 // ES6 environment
-import 'babel-polyfill';
+import '@babel/polyfill';
 
 // DOM polyfills
 import 'dom-polyfills';

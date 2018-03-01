@@ -21,7 +21,7 @@
     ref="modal">
     <div class="modal-body">
         <div v-show="!edit && !confirm">
-            {{{ resource.description | markdown }}}
+            <div v-html="resource.description | markdown"></div>
 
             <dl class="dl-horizontal dl-wide">
                 <dt>{{ _('Type') }}</dt>

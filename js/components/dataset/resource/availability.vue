@@ -1,7 +1,5 @@
 <template>
-    <span v-if="availability === 'AVAILABLE'" class="badge bg-green">✓</span>
-    <span v-if="availability === 'NOT_AVAILABLE'" class="badge bg-red">×</span>
-    <span v-if="availability === 'UNKNOWN'" class="badge bg-gray">?</span>
+<span class="badge" :class="classes">{{ icon }}</span>
 </template>
 
 <script>
@@ -22,6 +20,26 @@ export default {
                     return 'NOT_AVAILABLE';
                 default:
                     return 'UNKNOWN';
+            }
+        },
+        classes() {
+            switch(this.availability) {
+                case 'AVAILABLE':
+                    return ['bg-green'];
+                case 'NOT_AVAILABLE':
+                    return ['bg-red'];
+                default:
+                    return ['bg-gray'];
+            }
+        },
+        icon() {
+            switch(this.availability) {
+                case 'AVAILABLE':
+                    return '✓';
+                case 'NOT_AVAILABLE':
+                    return '×';
+                default:
+                    return '?';
             }
         }
     }

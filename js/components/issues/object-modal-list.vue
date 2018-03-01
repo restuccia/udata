@@ -6,7 +6,7 @@
                 <i class="fa fa-2x fa-refresh fa-spin"></i>
             </div>
         </div>
-        <div class="issue" v-for="issue in issues" @click="$dispatch('issue:selected', issue)">
+        <div class="issue" v-for="issue in issues" :key="issue.id" @click="$dispatch('issue:selected', issue)">
             <div class="pull-left">
                 <avatar :user="issue.user"></avatar>
             </div>
@@ -44,7 +44,7 @@ export default {
             issues: [],
         };
     },
-    ready() {
+    mounted() {
         this.$api
             .get('issues/', {for: this.subject.id})
             .then(response => {

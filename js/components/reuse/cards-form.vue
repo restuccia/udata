@@ -54,6 +54,7 @@
 </style>
 
 <template>
+<div>
     <div class="row completer-row">
         <div class="col-lg-10 col-lg-offset-1">
             <div class="input-group">
@@ -73,11 +74,12 @@
             :data-id="reuseid">
             <button type="button" class="close" @click="on_remove(reuseid)">
                 <span aria-hidden="true">&times;</span>
-                <span class="sr-only" v-i18n="Remove"></span>
+                <span class="sr-only">{{ _('Remove') }}</span>
             </button>
             <card :reuseid="reuseid"></card>
         </div>
     </div>
+</div>
 </template>
 
 <script>

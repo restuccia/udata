@@ -4,19 +4,19 @@
     <span class="fa fa-share-alt"></span>
     <div class="btn-group btn-group-lg" data-popover-content>
         <a class="btn btn-link" title="Google+" @click="click"
-            href="https://plus.google.com/share?url={{url|encode}}" target="_blank">
+            :href="`https://plus.google.com/share?url=${encodedUrl}`" target="_blank">
             <span class="fa fa-2x fa-google-plus"></span>
         </a>
         <a class="btn btn-link" title="Twitter" @click="click"
-            href="https://twitter.com/home?status={{title|encode}}%20-%20{{url|encode}}" target="_blank">
+            :href="`https://twitter.com/home?status=${encodedTitle}%20-%20${encodedUrl}`" target="_blank">
             <span class="fa fa-2x fa-twitter"></span>
         </a>
         <a class="btn btn-link" title="Facebook" @click="click"
-            href="https://www.facebook.com/sharer/sharer.php?u={{url|encode}}" target="_blank">
+            :href="`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`" target="_blank">
             <span class="fa fa-2x fa-facebook"></span>
         </a>
         <a class="btn btn-link" title="LinkedIn" @click="click"
-            href="https://www.linkedin.com/shareArticle?mini=true&url={{url|encode}}&title={{title|encode}}" target="_blank">
+            :href="`https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}`" target="_blank">
             <span class="fa fa-2x fa-linkedin"></span>
         </a>
     </div>
@@ -37,9 +37,17 @@ export default {
             required: true
         }
     },
-    filters: {
-        encode: encodeURIComponent
+    computed: {
+        encodedTitle() {
+            return encodeURIComponent(this.title);
+        },
+        encodedUrl() {
+            return encodeURIComponent(this.url);
+        }
     },
+    // filters: {
+    //     encode: encodeURIComponent
+    // },
     methods: {
         click() {
             pubsub.publish('SHARE');

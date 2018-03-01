@@ -21,12 +21,6 @@ export function install(Vue) {
         return value ? moment(value).fromNow(true) : '-';
     });
 
-    Vue.directive('i18n', {
-        bind: function() {
-            this.el.innerHTML = i18n._(this.expression);
-        }
-    });
-
     // Make translations accesible globally and on instance
     Vue._ = Vue.prototype._ = i18n._;
     Vue.lang = Vue.prototype.lang = i18n.lang;

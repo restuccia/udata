@@ -19,11 +19,11 @@
             <dt>{{ _('Ended at') }}</dt>
             <dd>{{ job.ended | dt }}</dd>
             <dt>{{ _('Status') }}</dt>
-            <dd><span class="label label-{{ job.status | statusClass }}">{{ job.status | statusI18n }}</span></dd>
+            <dd><span class="label" :class="job.status | statusClass">{{ job.status | statusI18n }}</span></dd>
             <dt v-if="job.errors && job.errors.length">{{ _('Errors') }}</dt>
             <dd v-if="job.errors && job.errors.length">
                 <div v-for="error in job.errors">
-                    <p><strong>{{{error.message | markdown}}}</strong></p>
+                    <p><strong v-html="error.message | markdown"></strong></p>
                     <div v-if="error.details">
                     <code><pre>{{error.details}}</pre></code>
                     </div>
@@ -104,7 +104,7 @@ export default {
     },
     filters: {
         statusClass(value) {
-            return JOB_STATUS_CLASSES[value] || '';
+            return `label-${JOB_STATUS_CLASSES[value] || ''}`;
         },
         statusI18n(value) {
             return JOB_STATUS_I18N[value];

@@ -13,7 +13,7 @@
 
     <div class="card-body">
         <h4>{{ organization.name }}</h4>
-        <div class="clamp-3">{{{ organization.description | markdown 180 }}}</div>
+        <div class="clamp-3" v-html="organization.description | markdown(180)"></div>
     </div>
 
     <footer v-if="organization.metrics" class="card-footer">

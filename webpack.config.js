@@ -18,16 +18,16 @@ const less_loader = ExtractTextPlugin.extract({
     ],
     fallback: 'style-loader',
 });
-const babel_loader = {
-    loader: 'babel-loader',
-    options: {
-        presets: [
-            ['es2015', { 'modules': false }],
-        ],
-        comments: false,
-        plugins: ['transform-runtime']
-    }
-};
+// const babel_loader = {
+//     loader: 'babel-loader',
+//     options: {
+//         presets: [
+//             ['es2015', { 'modules': false }],
+//         ],
+//         comments: false,
+//         plugins: ['transform-runtime']
+//     }
+// };
 
 const languages = ['en', 'es', 'fr', 'pt'];
 const public_path = '/static/';
@@ -77,11 +77,11 @@ module.exports = {
                 loaders: {
                     css: css_loader,
                     less: less_loader,
-                    js: babel_loader
+                    js: 'babel-loader'
                 }
             }},
             {test: /\.(woff|svg|ttf|eot|otf)([\?]?.*)$/, exclude: /img/, loader: 'file-loader?name=[name].[ext]'},
-            {test: /\.js$/, loader: babel_loader, include: [
+            {test: /\.js$/, loader: 'babel-loader', include: [
                     path.resolve(__dirname, 'js'),
                     path.resolve(__dirname, 'node_modules/vue-strap/src'),
                 ]

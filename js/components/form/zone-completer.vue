@@ -141,7 +141,7 @@ export default {
             return item;
         });
     },
-    ready() {
+    mounted() {
         this.levels.fetch();
     },
     methods: {
