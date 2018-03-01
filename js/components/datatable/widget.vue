@@ -30,7 +30,7 @@
             <div class="input-group">
                 <input type="text" class="form-control input-sm pull-right"
                     style="width: 150px;" :placeholder="_('Search')"
-                    v-model="search_query" debounce="500" @keyup.enter="search">
+                    v-model="search_query" @keyup.enter="search">
                 <div class="input-group-btn">
                     <button class="btn btn-sm btn-flat" @click="search">
                         <i class="fa fa-search"></i>
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import debounce from 'debounce';
 import Box from 'components/containers/box.vue';
 import Datatable from 'components/datatable/table.vue';
 import PaginationWidget from 'components/pagination.vue';
@@ -114,9 +115,9 @@ export default {
         }
     },
     watch: {
-        search_query(query) {
+        search_query: debounce(function(query) {
             this.p.search(query);
-        }
+        }, 500)
     }
 };
 </script>

@@ -17,7 +17,7 @@
         </div>
         <input name="q" type="search" class="form-control" autocomplete="off"
             :placeholder="placeholder || _('Search')"
-            v-model="query" debounce="200"
+            v-model="query"
             @keydown="show = true"
             @keydown.up.prevent="up"
             @keydown.down.prevent="down"
@@ -28,11 +28,11 @@
             />
     </div>
     <ul class="dropdown-menu suggestion" ref="dropdown">
-        <li v-for="group in groupsWithResults" track-by="id" class="result-group">
+        <li v-for="group in groupsWithResults" :key="group.id" class="result-group">
             <span v-if="group.loading" class="fa fa-spin fa-spinner group-status"></span>
             <strong class="search-header">{{ group.name }}</strong>
             <ul>
-                <li v-for="item in group.items" track-by="id" :class="{'active': isActive(item)}" @mousedown.prevent="hit" @mousemove="setActive(item)">
+                <li v-for="item in group.items" :key="item.id" :class="{'active': isActive(item)}" @mousedown.prevent="hit" @mousemove="setActive(item)">
                     <a>
                         <partial :name="group.template || 'default'"></partial>
                     </a>
@@ -46,6 +46,7 @@
 <script>
 import { Cache } from 'cache';
 import { escapeRegex } from 'utils';
+import debounce from 'debounce';
 import placeholders from 'helpers/placeholders';
 
 function group(id, name, template) {
@@ -107,12 +108,12 @@ export default {
             <p v-html="item.title | stripTags | highlight query"></p>
             <small v-if="item.acronym" v-html="item.acronym | highlight query"></small>`,
         organization: `<div class="logo"><img :src="item.image_url || placeholders.organization" class="avatar" width="30" height="30" alt=""></div>
-            <p v-html="item.name | stripTags | highlight query"></p>
-            <small v-if="item.acronym" v-html="item.acronym | highlight query"></small>`,
+            <p v-html="item.name | stripTags | highlight(query)"></p>
+            <small v-if="item.acronym" v-html="item.acronym | highlight(query)"></small>`,
         territory: `<div class="logo">
             <img :src="item.image_url || placeholders.territory" class="avatar" width="30" height="30" alt="">
             </div>
-            <p v-html="item.title | stripTags | highlight query"></p>
+            <p v-html="item.title | stripTags | highlight(query)"></p>
             <small v-if="item.parent">{{ item.parent }}</small>`,
     },
     methods: {
@@ -161,7 +162,7 @@ export default {
         }
     },
     watch: {
-        query(value) {
+        query: debounce(function(value) {
             const query = value.trim()
             if (!query || query.length < this.minLength) {
                 this.reset()
@@ -193,7 +194,7 @@ export default {
                         });
                 }
             });
-        }
+        }, 200)
     }
 };
 </script>

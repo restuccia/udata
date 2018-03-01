@@ -9,13 +9,13 @@
     <div class="input-group" :class="{ 'open': picking }">
         <input type="text" class="input-sm form-control"
             v-el:start-input :placeholder="_('Start')"
-            @focus="onFocus" @input="onChange | debounce 500"
+            @focus="onFocus" @input="onChange"
             :required="required"
             :value="currentMin | dt(DATE_FORMAT, '')">
         <span class="input-group-addon">{{ _('to') }}</span>
         <input type="text" class="input-sm form-control"
             v-el:end-input :placeholder="_('End')"
-            @focus="onFocus" @input="onChange | debounce 500"
+            @focus="onFocus" @input="onChange"
             :required="required"
             :value="currentMax | dt(DATE_FORMAT, '')">
     </div>
@@ -33,6 +33,7 @@
 
 <script>
 import Calendar from 'components/calendar.vue';
+import debounce from 'debounce';
 import moment from 'moment';
 
 const DATE_FORMAT = 'L';
@@ -130,13 +131,14 @@ export default {
             this.picking = true;
             this.pickedField = e.target;
         },
-        onChange(e) {
+        onChange: debounce(function(e) {
             try {
                 this.currentValue = moment(e.target.value, DATE_FORMAT);
+
             } catch(e) {
                 // Don't do anything while typing (ie. incomplete date is unparseable)
             }
-        },
+        }, 500),
         onOutside() {
             this.picking = false;
         }
