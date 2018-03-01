@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import TabSet from 'vue-strap/src/Tabset.vue';
+import TabSet from './tabset.vue';
 
 export default {
     mixins: [TabSet],

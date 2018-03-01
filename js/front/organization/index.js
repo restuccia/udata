@@ -9,8 +9,6 @@ import log from 'logger';
 
 import Vue from 'vue';
 
-// import Tabset from 'vue-strap/src/Tabset.vue';
-
 import FollowButton from 'components/buttons/follow.vue';
 import ActivityTimeline from 'components/activities/timeline.vue';
 import DashboardGraphs from 'components/dashboard/graphs.vue';
