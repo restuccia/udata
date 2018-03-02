@@ -21,7 +21,7 @@
                 <span class="fa fa-download"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li v-for="download in downloads">
+                <li v-for="download in downloads" :key="download.url">
                     <a :href="download.url">{{download.label}}</a>
                 </li>
             </ul>

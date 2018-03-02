@@ -2,7 +2,7 @@
 <tr class="pointer"
     :class="{ 'active': selected }"
     @click="item_click(item)">
-    <td v-for="field in fields" :key="field.key"
+    <td v-for="(field, idx) in fields" :key="idx"
         :class="{
             'text-center': field.align === 'center',
             'text-left': field.align === 'left',

@@ -68,8 +68,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
-    history: true,
-    root: config.admin_root,
+    mode: 'history',
+    base: config.admin_root,
     routes
 });
 
@@ -78,7 +78,7 @@ const router = new VueRouter({
  * Make the $go shortcut available on every view instance.
  */
 Vue.prototype.$go = function(route) {
-    return router.go(route);
+    return this.$router.push(route);
 };
 
 export default router;

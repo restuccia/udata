@@ -10,7 +10,7 @@
 <table class="table table-hover datatable">
     <thead>
         <tr>
-            <th v-for="field in fields"
+            <th v-for="(field, idx) in fields" :key="idx"
                 :class="classes_for(field)"
                 @click="header_click(field)"
                 :width="field.width | thwidth">
@@ -21,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr v-for="item in p.data" :track-by="trackBy" is="row"
+        <tr v-for="item in p.data" :key="item[trackBy]" is="row"
             :item="item" :fields="fields" :selected="item === selected">
         </tr>
     </tbody>

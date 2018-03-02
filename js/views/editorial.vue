@@ -69,7 +69,7 @@ export default {
             );
         }
     },
-    attached() {
+    mounted() {
         this.home_datasets.fetch();
         this.home_reuses.fetch();
         this.posts.fetch();

@@ -77,11 +77,11 @@ export default  {
             }]
         };
     },
-    attached() {
+    mounted() {
         this.update();
         this._handler = this.$root.me.$on('updated', this.update.bind(this));
     },
-    detached() {
+    destroy() {
         this._handler.remove();
     },
     methods: {

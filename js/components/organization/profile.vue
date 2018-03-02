@@ -29,12 +29,12 @@
             :endpoint="endpoint">
         </image-button>
         <div v-markdown="org.description"></div>
-        <div v-if="org.badges | length" class="label-list">
+        <div v-if="org.badges.length" class="label-list">
             <strong>
                 <span class="fa fa-fw fa-bookmark"></span>
                 {{ _('Badges') }}:
             </strong>
-            <span v-for="b in org.badges" class="label label-primary">{{ badges[b.kind] }}</span>
+            <span v-for="b in org.badges" :key="b.kind" class="label label-primary">{{ badges[b.kind] }}</span>
         </div>
     </div>
 </box>

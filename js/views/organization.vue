@@ -3,10 +3,10 @@
 <layout :title="org.name || ''" :subtitle="_('Organization')"
     :actions="actions" :badges="badges" :page="org.page || ''">
     <div class="row">
-        <sbox class="col-lg-3 col-xs-6" v-for="b in boxes" :key="b.label"
+        <small-box class="col-lg-3 col-xs-6" v-for="b in boxes" :key="b.label"
             :value="b.value" :label="b.label" :color="b.color"
             :icon="b.icon" :target="b.target">
-        </sbox>
+        </small-box>
     </div>
     <div class="row">
         <profile :org="org" class="col-xs-12 col-md-6"></profile>
@@ -38,12 +38,12 @@
     </div>
 
     <div class="row">
-        <followers id="followers-widget" class="col-xs-12 col-md-6" :followers="followers"></followers>
+        <followers-list id="followers-widget" class="col-xs-12 col-md-6" :followers="followers"></followers-list>
         <harvesters id="harvesters-widget" class="col-xs-12 col-md-6" :owner="org"></harvesters>
     </div>
 
     <div class="row">
-        <communities class="col-xs-12" :communities="communities"></communities>
+        <community-resources-list class="col-xs-12" :communities="communities"></community-resources-list>
     </div>
 </layout>
 </div>
@@ -59,14 +59,35 @@ import Organization from 'models/organization';
 import CommunityResources from 'models/communityresources';
 import {PageList, ModelPage} from 'models/base';
 // Widgets
+import Chart from 'components/charts/widget.vue';
+import CommunityResourcesList from 'components/dataset/communityresource/list.vue';
 import DatasetList from 'components/dataset/list.vue';
 import DiscussionList from 'components/discussions/list.vue';
+import FollowersList from 'components/follow/list.vue';
+import Harvesters from 'components/harvest/sources.vue';
 import IssueList from 'components/issues/list.vue';
 import Layout from 'components/layout.vue';
+import Members from 'components/organization/members.vue';
+import Profile from 'components/organization/profile.vue';
 import ReuseList from 'components/reuse/list.vue';
+import SmallBox from 'components/containers/small-box.vue';
 
 export default {
     name: 'OrganizationView',
+    components: {
+        Chart,
+        CommunityResourcesList,
+        DatasetList,
+        DiscussionList,
+        FollowersList,
+        Harvesters,
+        IssueList,
+        Layout,
+        Members,
+        Profile,
+        ReuseList,
+        SmallBox,
+    },
     data() {
         return {
             org: new Organization(),
@@ -191,20 +212,6 @@ export default {
             }];
         }
     },
-    components: {
-        sbox: require('components/containers/small-box.vue'),
-        profile: require('components/organization/profile.vue'),
-        members: require('components/organization/members.vue'),
-        chart: require('components/charts/widget.vue'),
-        followers: require('components/follow/list.vue'),
-        harvesters: require('components/harvest/sources.vue'),
-        communities: require('components/dataset/communityresource/list.vue'),
-        DiscussionList,
-        DatasetList,
-        ReuseList,
-        IssueList,
-        Layout,
-    },
     events: {
         'image:saved': function() {
             this.org.fetch();
@@ -227,8 +234,23 @@ export default {
             );
         }
     },
+    beforeRouteEnter(to, from, next) {
+        console.log('before route enter')
+        next(vm => {
+            vm.org.fetch(to.params.oid);
+        });
+    },
+    beforeRouteUpdate(to, from, next) {
+        console.log('before route update')
+        if (to.params.oid !== this.org.id) {
+            this.org.fetch(to.params.oid);
+            this.$scrollTo(this.$el);
+        }
+    },
     route: {
+
         data() {
+            console.log('route data')
             if (this.$route.params.oid !== this.org.id) {
                 this.org.fetch(this.$route.params.oid);
                 this.$scrollTo(this.$el);

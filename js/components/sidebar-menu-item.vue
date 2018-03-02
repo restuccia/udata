@@ -22,7 +22,7 @@
 <template>
 <li :class="{'treeview': children, 'active': active}">
     <a href @click.prevent="click">
-        <i v-if="icon" class="fa fa-fw fa-{{icon}}"></i>
+        <i v-if="icon" class="fa fa-fw" :class="iconClasses"></i>
         <img v-if="image" :src="image" />
         <span>{{ label | truncate(25) }}</span>
         <i v-if="is_tree" class="fa pull-right" :class="angleClasses"></i>
