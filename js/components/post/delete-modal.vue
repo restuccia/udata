@@ -1,9 +1,6 @@
 <template>
 <div>
-<modal :title="_('Confirm deletion')"
-    class="modal-danger post-delete-modal"
-    v-ref:modal>
-
+<modal :title="_('Confirm deletion')" ref="modal" class="modal-danger post-delete-modal">
     <div class="modal-body">
         <p class="lead text-center">
             {{ _('You are about to delete this post') }}

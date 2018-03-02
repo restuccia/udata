@@ -2,7 +2,7 @@
 <div>
 <layout :title="_('Dashboard')">
     <div class="row">
-        <small-box class="col-lg-3 col-xs-6" v-for="b in dataBoxes"
+        <small-box class="col-lg-3 col-xs-6" v-for="b in dataBoxes" :key="b.label"
             :value="b.value" :label="b.label" :color="b.color"
             :icon="b.icon" :target="b.target">
         </small-box>

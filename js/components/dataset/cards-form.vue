@@ -63,7 +63,7 @@
                 <span class="input-group-addon">
                     <span class="fa fa-cubes"></span>
                 </span>
-                <completer v-ref:completer></completer>
+                <completer ref="completer"></completer>
             </div>
         </div>
     </div>

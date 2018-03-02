@@ -16,16 +16,16 @@
     NB: This could be packaged as a standalone reusable component.
 -->
 <template>
-<div v-el:wrapper class="scrollbox__wrapper" :class="{dragging: dragging}">
-    <div v-el:area class="scrollbox__area"
+<div ref="wrapper" class="scrollbox__wrapper" :class="{dragging: dragging}">
+    <div ref="area" class="scrollbox__area"
         @wheel.prevent="onScroll"
         @touchstart.stop="startDrag"
         @touchmove="onDrag" @touchend="stopDrag"
         :style="{'margin-top': `${top * -1}px`, 'margin-left': `${left * -1}px` }">
         <slot></slot>
     </div>
-    <vertical-scrollbar v-if="canScrollY" v-ref:vscrollbar></vertical-scrollbar>
-    <horizontal-scrollbar v-if="canScrollX" v-ref:hscrollbar></horizontal-scrollbar>
+    <vertical-scrollbar v-if="canScrollY" ref="vscrollbar"></vertical-scrollbar>
+    <horizontal-scrollbar v-if="canScrollX" ref="hscrollbar"></horizontal-scrollbar>
 </div>
 </template>
 
@@ -141,11 +141,11 @@ export default {
 
         calculateSize() {
             // Computed Style
-            const style = window.getComputedStyle(this.$els.wrapper, null);
+            const style = window.getComputedStyle(this.$refs.wrapper, null);
 
             // Scroll Area Height and Width
-            this.area.height = this.$els.area.children[0].clientHeight;
-            this.area.width = this.$els.area.children[0].clientWidth;
+            this.area.height = this.$refs.area.children[0].clientHeight;
+            this.area.width = this.$refs.area.children[0].clientWidth;
 
             // Scroll Wrapper Height and Width
             this.wrapper.height = parseFloat(style.height);

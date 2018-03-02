@@ -3,7 +3,7 @@
 <layout :title="org.name || ''" :subtitle="_('Organization')"
     :actions="actions" :badges="badges" :page="org.page || ''">
     <div class="row">
-        <sbox class="col-lg-3 col-xs-6" v-for="b in boxes"
+        <sbox class="col-lg-3 col-xs-6" v-for="b in boxes" :key="b.label"
             :value="b.value" :label="b.label" :color="b.color"
             :icon="b.icon" :target="b.target">
         </sbox>

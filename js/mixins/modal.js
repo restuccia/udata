@@ -15,7 +15,7 @@ export default {
         $modal(options, propsData) {
             const constructor = Vue.extend(options);
             const el = document.createElement('div');
-            this.$els.modal.appendChild(el);
+            this.$refs.modal.appendChild(el);
             const modal = new constructor({el, parent: this, propsData});
             modal.$on('modal:closed', modal.$destroy);
             return modal;

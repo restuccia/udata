@@ -99,10 +99,10 @@ export default {
     computed: {
         menu() {
             const menu = MENU.concat(this.organizations_menus);
-            return this.$root.me.has_role('admin') ? menu.concat(BOTTOM_MENU) : menu;
+            return this.$root.me && this.$root.me.has_role('admin') ? menu.concat(BOTTOM_MENU) : menu;
         },
         organizations_menus() {
-            if (!this.$root.me.organizations) {
+            if (!this.$root || !this.$root.me || !this.$root.me.organizations) {
                 return [];
             }
             return this.$root.me.organizations.map(org => {

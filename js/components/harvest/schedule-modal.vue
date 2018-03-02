@@ -1,8 +1,8 @@
 <template>
 <div>
-    <modal v-ref:modal :title="_('Scheduling')" class="schedule-modal" :class="modalClass">
+    <modal ref="modal" :title="_('Scheduling')" class="schedule-modal" :class="modalClass">
         <div class="modal-body" v-if="!unscheduling">
-            <horizontal-form class="schedule-form" :fields="fields" :defs="defs" v-ref:form
+            <horizontal-form class="schedule-form" :fields="fields" :defs="defs" ref="form"
                 :model="source">
             </horizontal-form>
         </div>

@@ -14,7 +14,7 @@
       </dropdown>
     </template>
   </ul>
-  <div class="tab-content" v-el:tab-content>
+  <div class="tab-content" ref="tab-content">
     <slot></slot>
   </div>
 </div>

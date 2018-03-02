@@ -6,7 +6,7 @@
 
 <template>
     <form role="form" ref="form">
-        <field v-for="field in fields" :field="field"
+        <field v-for="field in fields" :key="field.id" :field="field"
             :schema="schema" :model="model">
         </field>
     </form>

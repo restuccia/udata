@@ -108,8 +108,8 @@ export default {
                 debug: DEBUG,
                 multiple: this.$options.uploadMultiple,
                 uploaderType: 'basic',
-                autoUpload: this.$options.autoUpload,
-                button: this.$els.uploadBtn,
+                autoUpload: this.$options.hasOwnProperty('autoUpload') ? this.$options.autoUpload : true,
+                button: this.$refs.uploadBtn,
                 request: {
                     endpoint: this.upload_endpoint,
                     inputName: 'file',

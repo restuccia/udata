@@ -1,6 +1,6 @@
 <template>
     <form role="form" :class="{ 'form-horizontal': 1 }" ref="form">
-        <field v-for="field in fields" :field="field"
+        <field v-for="field in fields" :field="field" :key="field.id"
             :schema="schema" :model="model"></field>
     </form>
 </template>

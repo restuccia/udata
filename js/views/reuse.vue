@@ -3,7 +3,7 @@
 <layout :title="reuse.title || ''" :subtitle="_('Reuse')"
     :actions="actions" :badges="badges" :page="reuse.page || ''">
     <div class="row">
-        <small-box class="col-lg-4 col-xs-6" v-for="b in boxes"
+        <small-box class="col-lg-4 col-xs-6" v-for="b in boxes" :key="b.label"
             :value="b.value" :label="b.label" :color="b.color"
             :icon="b.icon" :target="b.target">
         </small-box>
@@ -68,7 +68,7 @@ export default {
     },
     data() {
         return {
-            reuse: new Reuse({mask: MASK}), 
+            reuse: new Reuse({mask: MASK}),
             metrics: new Metrics({query: {
                 start: moment().subtract(15, 'days').format('YYYY-MM-DD'),
                 end: moment().format('YYYY-MM-DD')

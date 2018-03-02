@@ -2,8 +2,8 @@
     Issue modal for a given object.
 -->
 <template>
-<modal class="object-issues-modal" v-ref:modal :title="title">
-    <component :is="view" v-ref:view :subject="subject" :issue="issue"></component>
+<modal class="object-issues-modal" ref="modal" :title="title">
+    <component :is="view" ref="view" :subject="subject" :issue="issue"></component>
 </modal>
 </template>
 

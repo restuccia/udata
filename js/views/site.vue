@@ -2,7 +2,7 @@
 <div>
 <layout :title="_('Site')">
     <div class="row">
-        <small-box class="col-lg-3 col-xs-6" v-for="b in boxes"
+        <small-box class="col-lg-3 col-xs-6" v-for="b in boxes" :key="b.label"
             :value="b.value" :label="b.label" :color="b.color"
             :icon="b.icon" :target="b.target">
         </small-box>

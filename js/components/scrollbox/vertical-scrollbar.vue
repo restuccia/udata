@@ -1,7 +1,7 @@
 <template>
-<div v-el:container  v-if="height < 100" @click="jump"
+<div ref="container"  v-if="height < 100" @click="jump"
     class="scrollbox__scrollbar-vertical">
-    <div v-el:scrollbar class="scrollbar"
+    <div ref="scrollbar" class="scrollbar"
         :style="{height: `${height}%`, top: `${$parent.movement.y}%`}"
         @touchstart.prevent.stop="startDrag"
         @mousedown.prevent.stop="startDrag">
@@ -54,10 +54,10 @@ export default {
         },
 
         jump(e) {
-            const isContainer = e.target === this.$els.container;
+            const isContainer = e.target === this.$refs.container;
             if (isContainer) {
                 // Get the Element Position
-                const position = this.$els.scrollbar.getBoundingClientRect();
+                const position = this.$refs.scrollbar.getBoundingClientRect();
 
                 // Calculate the vertical Movement
                 const yMovement = e.pageY - position.top;

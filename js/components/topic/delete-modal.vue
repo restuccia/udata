@@ -1,8 +1,6 @@
 <template>
 <div>
-<modal :title="_('Confirm deletion')"
-    class="modal-danger topic-delete-modal"
-    v-ref:modal>
+<modal :title="_('Confirm deletion')" class="modal-danger topic-delete-modal" ref="modal">
 
     <div class="modal-body">
         <p class="lead text-center">

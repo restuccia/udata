@@ -37,7 +37,7 @@
         </button>
     </span>
     <div class="dropdown-menu" :style="dropdownStyle">
-        <calendar v-ref:calendar :selected="currentValue" :min="dateMin" :max="dateMax"></calendar>
+        <calendar ref="calendar" :selected="currentValue" :min="dateMin" :max="dateMax"></calendar>
     </div>
     <input type="hidden" ref="start-hidden"
         :id="startId" :name="startId"
@@ -74,10 +74,10 @@ export default {
     computed: {
         currentValue: {
             get() {
-                return this.pickedField === this.$els.startInput ? this.startValue : this.endValue;
+                return this.pickedField === this.$refs.startInput ? this.startValue : this.endValue;
             },
             set(value) {
-                if (this.pickedField === this.$els.startInput) {
+                if (this.pickedField === this.$refs.startInput) {
                     this.startValue = value;
                 } else {
                     this.endValue = value;
@@ -91,12 +91,12 @@ export default {
             return `${this.field.id}.end`;
         },
         dateMin() {
-            if (this.pickedField === this.$els.endInput) {
+            if (this.pickedField === this.$refs.endInput) {
                 return this.startValue || undefined;
             }
         },
         dateMax() {
-            if (this.pickedField === this.$els.startInput) {
+            if (this.pickedField === this.$refs.startInput) {
                 return this.endValue || undefined;
             }
         },

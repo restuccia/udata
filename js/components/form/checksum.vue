@@ -18,7 +18,7 @@
             <li v-for="type in specs.type.enum"><a href @click.prevent="setType(type)">{{type}}</a></li>
         </ul>
     </div>
-    <input type="hidden" v-el:type
+    <input type="hidden"
         :name="typeFieldName"
         :placeholder="placeholder"
         :required="required"

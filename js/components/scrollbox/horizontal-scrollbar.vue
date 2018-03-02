@@ -1,7 +1,7 @@
 <template>
-<div v-el:container v-if="width < 100" @click="jump"
+<div ref="container" v-if="width < 100" @click="jump"
     class="scrollbox__scrollbar-horizontal">
-    <div v-el:scrollbar class="scrollbar"
+    <div ref="scrollbar" class="scrollbar"
         :style="{width: `${width}%`, left: `${$parent.movement.x}%`}"
         @touchstart.prevent.stop="startDrag"
         @mousedown.prevent.stop="startDrag">
@@ -54,10 +54,10 @@ export default {
         },
 
         jump(e) {
-            const isContainer = e.target === this.$els.container;
+            const isContainer = e.target === this.$refs.container;
             if (isContainer) {
                 // Get the Element Position
-                const position = this.$els.scrollbar.getBoundingClientRect();
+                const position = this.$refs.scrollbar.getBoundingClientRect();
 
                 // Calculate the horizontal Movement
                 const xMovement = e.pageX - position.left;

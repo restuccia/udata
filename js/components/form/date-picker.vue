@@ -18,7 +18,7 @@
         :value="value | dt(dateFormat, '')"
         :readonly="readonly"></input>
     <div class="dropdown-menu dropdown-menu-right">
-        <calendar v-ref:calendar :selected="value"></calendar>
+        <calendar ref="calendar" :selected="value"></calendar>
     </div>
     <input v-if="serializable" v-el:hidden type="hidden"
         :name="field.id"

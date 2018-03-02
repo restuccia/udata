@@ -3,7 +3,7 @@
 <layout :title="dataset.full_title || ''" :subtitle="_('Dataset')"
     :actions="actions" :badges="badges" :page="dataset.page || ''">
     <div class="row">
-        <small-box class="col-lg-4 col-xs-6" v-for="b in boxes"
+        <small-box class="col-lg-4 col-xs-6" v-for="b in boxes" :key="b.label"
             :value="b.value" :label="b.label" :color="b.color"
             :icon="b.icon" :target="b.target">
         </small-box>

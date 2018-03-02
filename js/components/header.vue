@@ -21,7 +21,7 @@
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
-        <a class="sidebar-toggle" role="button" @click="click($event)">
+        <a href class="sidebar-toggle" role="button" @click.prevent="click">
             <span class="sr-only">Toggle navigation</span>
             <span :class="['fa', $root.toggled ? 'fa-angle-double-left' : 'fa-angle-double-right']"></span>
         </a>
@@ -38,17 +38,14 @@
 
 
 <script>
-'use strict';
+import UserMenu from 'components/user-menu.vue';
+import NotificationMenu from 'components/notification-menu.vue';
+import AddMenu from 'components/add-menu.vue';
 
-module.exports = {
-    components: {
-        'user-menu': require('components/user-menu.vue'),
-        'notification-menu': require('components/notification-menu.vue'),
-        'add-menu': require('components/add-menu.vue')
-    },
+export default {
+    components: {AddMenu, NotificationMenu, UserMenu},
     methods: {
-        click(e) {
-            e.preventDefault();
+        click() {
             this.$dispatch('navigation:toggled');
         }
     }

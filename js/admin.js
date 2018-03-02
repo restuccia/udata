@@ -29,6 +29,7 @@ Vue.use(require('plugins/outside'));
 
 new Vue({
     el: '#app',
+    mixins: [Admin],
     router,
-    render: h => h(Admin),
+    // render: h => h(Admin),
 });

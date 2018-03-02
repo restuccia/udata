@@ -6,7 +6,7 @@
         <div class="integrate-popover">
             <p>{{ help }}</p>
             <div class="integrate-popover-wrapper">
-                <textarea readonly rows="4" v-el:textarea>{{ snippet }}</textarea>
+                <textarea readonly rows="4" ref="textarea">{{ snippet }}</textarea>
                 <a class="btn btn-link" @click="click"
                     :title="tooltip" v-tooltip tooltip-placement="bottom">
                     <span class="fa fa-3x fa-clipboard"></span>
@@ -49,7 +49,7 @@ export default {
     },
     methods: {
         click() {
-            this.$els.textarea.select();
+            this.$refs.textarea.select();
             document.execCommand('copy');
             pubsub.publish('INTEGRATE');
         }

@@ -24,7 +24,7 @@
     <a href @click.prevent="click">
         <i v-if="icon" class="fa fa-fw fa-{{icon}}"></i>
         <img v-if="image" :src="image" />
-        <span>{{ label | truncate 25 }}</span>
+        <span>{{ label | truncate(25) }}</span>
         <i v-if="is_tree" class="fa pull-right" :class="angleClasses"></i>
         <small v-if="badge" class="badge pull-right" :class="badgeClasses">{{badge.label}}</small>
     </a>

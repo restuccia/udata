@@ -16,7 +16,7 @@ export default {
     methods: {
         build_chart() {
             if (!this.score) return;
- 
+
             const data = {
                 datasets: [{
                     backgroundColor: [ "#3C8DBC", "#F5F5F5" ],
@@ -24,8 +24,8 @@ export default {
                 }],
             };
 
-            const ctx = this.$els.canvas.getContext('2d');
- 
+            const ctx = this.$refs.canvas.getContext('2d');
+
             new Chart(ctx, {
                 type: 'doughnut',
                 data: data,

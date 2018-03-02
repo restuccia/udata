@@ -8,18 +8,18 @@
 <div class="temporal-coverage-facet" v-outside="onOutside">
     <div class="input-group" :class="{ 'open': picking }">
         <input type="text" class="input-sm form-control"
-            v-el:start-input :placeholder="_('Start')"
+            ref="start-input" :placeholder="_('Start')"
             @focus="onFocus" @input="onChange"
             :required="required"
             :value="currentMin | dt(DATE_FORMAT, '')">
         <span class="input-group-addon">{{ _('to') }}</span>
         <input type="text" class="input-sm form-control"
-            v-el:end-input :placeholder="_('End')"
+            ref="end-input" :placeholder="_('End')"
             @focus="onFocus" @input="onChange"
             :required="required"
             :value="currentMax | dt(DATE_FORMAT, '')">
     </div>
-    <calendar v-ref:calendar v-show="picking" :selected="currentValue" :min="dateMin" :max="dateMax"></calendar>
+    <calendar ref="calendar" v-show="picking" :selected="currentValue" :min="dateMin" :max="dateMax"></calendar>
     <div class="row" v-show="changed && !picking">
         <div class="col-xs-12">
             <button class="btn btn-default btn-block btn-apply" @click="apply">
@@ -82,10 +82,10 @@ export default {
         },
         currentValue: {
             get() {
-                return this.pickedField === this.$els.startInput ? this.currentMin : this.currentMax;
+                return this.pickedField === this.$refs.startInput ? this.currentMin : this.currentMax;
             },
             set(value) {
-                if (this.pickedField === this.$els.startInput) {
+                if (this.pickedField === this.$refs.startInput) {
                     this.pickedMin = value;
                 } else {
                     this.pickedMax = value;
@@ -99,10 +99,10 @@ export default {
             return this.pickedMax || this.max;
         },
         dateMin() {
-            return this.pickedField === this.$els.endInput ? this.currentMin : this.min;
+            return this.pickedField === this.$refs.endInput ? this.currentMin : this.min;
         },
         dateMax() {
-            return this.pickedField === this.$els.startInput ? this.currentMax : this.max;
+            return this.pickedField === this.$refs.startInput ? this.currentMax : this.max;
         }
     },
     events: {
