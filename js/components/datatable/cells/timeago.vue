@@ -3,7 +3,10 @@
 </template>
 
 <script>
+import BaseCell from './base.vue';
+
 export default {
-    name: 'datatable-cell-timeago'
+    name: 'timeago-cell',
+    mixins: [BaseCell],
 };
 </script>

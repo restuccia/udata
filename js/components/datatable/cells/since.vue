@@ -3,7 +3,10 @@
 </template>
 
 <script>
+import BaseCell from './base.vue';
+
 export default {
-    name: 'datatable-cell-since'
+    name: 'since-cell',
+    mixins: [BaseCell],
 };
 </script>

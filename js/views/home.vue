@@ -103,11 +103,11 @@ export default {
         ReuseList,
         Layout
     },
-    attached() {
+    mounted() {
         this.update();
         this._handler = this.$root.me.$on('updated', this.update.bind(this));
     },
-    detached() {
+    destroyed() {
         this._handler.remove();
     },
     methods: {

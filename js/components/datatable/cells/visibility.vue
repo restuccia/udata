@@ -4,6 +4,7 @@
 
 <script>
 import {_} from 'i18n';
+import BaseCell from './base.vue';
 
 const VISIBILITIES = {
     deleted: {
@@ -21,7 +22,8 @@ const VISIBILITIES = {
 };
 
 export default {
-    name: 'datatable-cell-visibility',
+    name: 'visibility-cell',
+    mixins: [BaseCell],
     computed: {
         classes() {
             if (!this.item) return;

@@ -11,7 +11,11 @@
 </template>
 
 <script>
+import BaseCell from './base.vue';
+
 export default {
+    name: 'avatar-cell',
+    mixins: [BaseCell],
     attached() {
         // Dirty hack to fix class on field/td iteration
         this.$el.closest('td').classList.add('avatar-cell');

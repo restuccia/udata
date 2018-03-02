@@ -6,8 +6,11 @@
 </template>
 
 <script>
+import BaseCell from './base.vue';
+
 export default {
-    name: 'datatable-cell-metric',
+    name: 'metric-cell',
+    mixins: [BaseCell],
     default: 0
 };
 </script>

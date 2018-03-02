@@ -6,15 +6,18 @@
 
 <template>
 <div>
-<span v-for="label in labels" class="label" :class="labelClass(label)">
+<span v-for="label in labels" :key="label" class="label" :class="labelClass(label)">
     {{label | format}}
 </span>
 </div>
 </template>
 
 <script>
+import BaseCell from './base.vue';
+
 export default {
-    name: 'datatable-cell-label',
+    name: 'label-cell',
+    mixins: [BaseCell],
     filters: {
         format(value) {
             return this.field.hasOwnProperty('label_func')

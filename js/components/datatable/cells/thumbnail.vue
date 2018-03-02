@@ -12,9 +12,12 @@
 
 <script>
 import placeholders from 'helpers/placeholders';
+import BaseCell from './base.vue';
 
 export default {
-    attached() {
+    name: 'thumbnail-cell',
+    mixins: [BaseCell],
+    mounted() {
         // Dirty hack to fix class on field/td iteration
         this.$el.closest('td').classList.add('thumbnail-cell');
     },

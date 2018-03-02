@@ -3,8 +3,11 @@
 </template>
 
 <script>
+import BaseCell from './base.vue';
+
 export default {
-    name: 'datatable-cell-playpause',
+    name: 'playpause-cell',
+    mixins: [BaseCell],
     default: false,
     computed: {
         classes() {

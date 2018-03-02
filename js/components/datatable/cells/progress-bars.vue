@@ -8,8 +8,11 @@
 </template>
 
 <script>
+import BaseCell from './base.vue';
+
 export default {
-    name: 'datatable-cell-progress-bars',
+    name: 'progress-bar-cell',
+    mixins: [BaseCell],
     computed: {
         progress_class() {
             if (this.value < 2) {
