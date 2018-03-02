@@ -16,6 +16,7 @@ import 'bootstrap';
 
 import Vue from 'vue';
 import router from 'admin.routes';
+import Admin from 'admin.vue';
 
 Vue.use(require('plugins/util'));
 Vue.use(require('plugins/text'));
@@ -25,4 +26,9 @@ Vue.use(require('plugins/scroll-to'));
 Vue.use(require('plugins/tooltips'));
 Vue.use(require('plugins/outside'));
 
-router.start(require('admin.vue'), '#app');
+
+new Vue({
+    el: '#app',
+    router,
+    render: h => h(Admin),
+});

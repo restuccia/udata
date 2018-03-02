@@ -4,252 +4,73 @@ import config from 'config';
 
 Vue.use(VueRouter);
 
-const router = new VueRouter({
-    history: true,
-    root: config.admin_root
-});
 
-router.map({
-    '/': {
-        component(resolve) {
-            require(['./views/home.vue'], resolve);
-        }
-    },
-    '/me/': {
-        name: 'me',
-        component(resolve) {
-            require(['./views/me.vue'], resolve);
-        }
-    },
-    '/me/edit/': {
-        name: 'me-edit',
-        component(resolve) {
-            require(['./views/me-edit.vue'], resolve);
-        }
-    },
-    '/site/': {
-        name: 'site',
-        component(resolve) {
-            require(['./views/site.vue'], resolve);
-        }
-    },
-    '/dataset/new/': {
-        component(resolve) {
-            require(['./views/dataset-wizard.vue'], resolve);
-        }
-    },
-    '/dataset/new/:oid/': {
-        component(resolve) {
-            require(['./views/dataset-wizard.vue'], resolve);
-        },
+const routes = [
+    {path: '/', component: () => import('./views/home.vue')},
+    {path: '/me/', name: 'me', component: () => import('./views/me.vue')},
+    {path: '/me/edit/', name: 'me-edit', component: () => import('./views/me-edit.vue')},
+    {path: '/site/', name: 'site', component: () => import('./views/site.vue')},
+    {path: '/dataset/new/', component: () => import('./views/dataset-wizard.vue')},
+    {path: '/dataset/new/:oid/', component: () => import('./views/dataset-wizard.vue'),
         callback(view) {
             if (!view.dataset.id) {
                 view.dataset.fetch(oid);
             }
         }
     },
-    '/dataset/new/:oid/share': {
-        component(resolve) {
-            require(['./views/dataset-wizard.vue'], resolve);
-        },
+    {path: '/dataset/new/:oid/share', component: () => import('./views/dataset-wizard.vue'),
         callback(view) {
             if (!view.dataset.id) {
                 view.dataset.fetch(oid);
             }
         }
     },
-    '/dataset/:oid/': {
-        name: 'dataset',
-        component(resolve) {
-            require(['./views/dataset.vue'], resolve);
-        },
-        subRoutes: {
-            'issue/:issue_id/': {
-                name: 'dataset-issue',
-                component(resolve) {
-                    require(['./components/issues/modal.vue'], resolve);
-                }
-            },
-            'discussion/:discussion_id/': {
-                name: 'dataset-discussion',
-                component(resolve) {
-                    require(['./components/discussions/modal.vue'], resolve);
-                }
-            },
-            'community-resource/:rid/': {
-                name: 'dataset-community-resource',
-                component(resolve) {
-                    require(['./components/dataset/resource/modal.vue'], resolve);
-                }
-            },
-            '/resource/:rid/': {
-                name: 'dataset-resource',
-                component(resolve) {
-                    require(['./components/dataset/resource/modal.vue'], resolve);
-                }
-            },
-        }
-    },
-    '/dataset/:oid/edit/': {
-        name: 'dataset-edit',
-        component(resolve) {
-            require(['./views/dataset-edit.vue'], resolve);
-        },
-    },
-    '/community-resource/new/': {
-        component(resolve) {
-            require(['./views/community-resource-wizard.vue'], resolve);
-        }
-    },
-    '/reuse/new/': {
-        component(resolve) {
-            require(['./views/reuse-wizard.vue'], resolve);
-        }
-    },
-    '/reuse/:oid/': {
-        name: 'reuse',
-        component(resolve) {
-            require(['./views/reuse.vue'], resolve);
-        },
-        subRoutes: {
-            'issue/:issue_id/': {
-                name: 'reuse-issue',
-                component(resolve) {
-                    require(['./components/issues/modal.vue'], resolve);
-                }
-            },
-            'discussion/:discussion_id/': {
-                name: 'reuse-discussion',
-                component(resolve) {
-                    require(['./components/discussions/modal.vue'], resolve);
-                }
-            }
-        }
-    },
-    '/reuse/:oid/edit/': {
-        name: 'reuse-edit',
-        component(resolve) {
-            require(['./views/reuse-edit.vue'], resolve);
-        },
-    },
-    '/organization/new/': {
-        name: 'organization-new',
-        component(resolve) {
-            require(['./views/organization-wizard.vue'], resolve);
-        }
-    },
-    '/organization/new/:oid/': {
-        component(resolve) {
-            require(['./views/organization-wizard.vue'], resolve);
-        },
+    {path: '/dataset/:oid/', name: 'dataset', component: () => import('./views/dataset.vue'), children: [
+        {path: 'issue/:issue_id/', name: 'dataset-issue', component: () => import('./components/issues/modal.vue')},
+        {path: 'discussion/:discussion_id/', name: 'dataset-discussion', component: () => import('./components/discussions/modal.vue')},
+        {path: 'community-resource/:rid/', name: 'dataset-community-resource', component: () => import('./components/dataset/resource/modal.vue')},
+        {path: '/resource/:rid/', name: 'dataset-resource', component: () => import('./components/dataset/resource/modal.vue')},
+    ]},
+    {path: '/dataset/:oid/edit/', name: 'dataset-edit', component: () => import('./views/dataset-edit.vue')},
+    {path: '/community-resource/new/', component: () => import('./views/community-resource-wizard.vue')},
+    {path: '/reuse/new/', component: () => import('./views/reuse-wizard.vue')},
+    {path: '/reuse/:oid/', name: 'reuse', component: () => import('./views/reuse.vue'), children: [
+        {path: 'issue/:issue_id/', name: 'reuse-issue', component: () => import('./components/issues/modal.vue')},
+        {path: 'discussion/:discussion_id/', name: 'reuse-discussion', component: () => import('./components/discussions/modal.vue')},
+    ]},
+    {path: '/reuse/:oid/edit/', name: 'reuse-edit', component: () => import('./views/reuse-edit.vue')},
+    {path: '/organization/new/', name: 'organization-new', component: () => import('./views/organization-wizard.vue')},
+    {path: '/organization/new/:oid/', component: () => import('./views/organization-wizard.vue'),
         callback(view) {
             if (!view.organization.id) {
                 view.organization.fetch(oid);
             }
         }
     },
-    '/organization/:oid/': {
-        name: 'organization',
-        component(resolve) {
-            require(['./views/organization.vue'], resolve);
-        }
-    },
-    '/organization/:oid/edit/': {
-        name: 'organization-edit',
-        component(resolve) {
-            require(['./views/organization-edit.vue'], resolve);
-        },
-    },
-    '/user/:oid/': {
-        name: 'user',
-        component(resolve) {
-            require(['./views/user.vue'], resolve);
-        }
-    },
-    '/user/edit/:oid/': {
-        name: 'user-edit',
-        component(resolve) {
-            require(['./views/user-edit.vue'], resolve);
-        }
-    },
-    '/harvester/new/': {
-        component(resolve) {
-            require(['./views/harvester-wizard.vue'], resolve);
-        }
-    },
-    '/harvester/:oid/': {
-        name: 'harvester',
-        component(resolve) {
-            require(['./views/harvester.vue'], resolve);
-        },
-        subRoutes: {
-            'schedule': {
-                name: 'harvester-schedule',
-                component(resolve) {
-                    require(['./components/harvest/schedule-modal.vue'], resolve);
-                }
-            }
-        }
-    },
-    '/harvester/:oid/edit': {
-        name: 'harvester-edit',
-        component(resolve) {
-            require(['./views/harvester-edit.vue'], resolve);
-        }
-    },
-    '/post/new/': {
-        name: 'post-new',
-        component(resolve) {
-            require(['./views/post-wizard.vue'], resolve);
-        }
-    },
-    '/post/:oid/': {
-        name: 'post',
-        component(resolve) {
-            require(['./views/post.vue'], resolve);
-        }
-    },
-    '/post/:oid/edit/': {
-        name: 'post-edit',
-        component(resolve) {
-            require(['./views/post-edit.vue'], resolve);
-        }
-    },
-    '/topic/new/': {
-        name: 'topic-new',
-        component(resolve) {
-            require(['./views/topic-wizard.vue'], resolve);
-        }
-    },
-    '/topic/:oid/': {
-        name: 'topic',
-        component(resolve) {
-            require(['./views/topic.vue'], resolve);
-        }
-    },
-    '/topic/:oid/edit/': {
-        name: 'topic-edit',
-        component(resolve) {
-            require(['./views/topic-edit.vue'], resolve);
-        },
-    },
-    '/editorial/': {
-        name: 'editorial',
-        component(resolve) {
-            require(['./views/editorial.vue'], resolve);
-        }
-    },
-    '/system/': {
-        component(resolve) {
-            require(['./views/system.vue'], resolve);
-        }
-    },
-    '/search/': {
-        name: 'search',
-        component(resolve) {
-            require(['./views/search.vue'], resolve);
-        }
-    }
+    {path: '/organization/:oid/', name: 'organization', component: () => import('./views/organization.vue')},
+    {path: '/organization/:oid/edit/', name: 'organization-edit', component: () => import('./views/organization-edit.vue')},
+    {path: '/user/:oid/', name: 'user', component: () => import('./views/user.vue')},
+    {path: '/user/edit/:oid/', name: 'user-edit', component: () => import('./views/user-edit.vue')},
+    {path: '/harvester/new/', component: () => import('./views/harvester-wizard.vue')},
+    {path: '/harvester/:oid/', name: 'harvester', component: () => import('./views/harvester.vue'), children: [
+        {path: 'schedule', name: 'harvester-schedule', component: () => import('./components/harvest/schedule-modal.vue')},
+    ]},
+    {path: '/harvester/:oid/edit', name: 'harvester-edit', component: () => import('./views/harvester-edit.vue')},
+    {path: '/post/new/', name: 'post-new', component: () => import('./views/post-wizard.vue')},
+    {path: '/post/:oid/', name: 'post', component: () => import('./views/post.vue')},
+    {path: '/post/:oid/edit/', name: 'post-edit', component: () => import('./views/post-edit.vue')},
+    {path: '/topic/new/', name: 'topic-new', component: () => import('./views/topic-wizard.vue')},
+    {path: '/topic/:oid/', name: 'topic', component: () => import('./views/topic.vue')},
+    {path: '/topic/:oid/edit/', name: 'topic-edit', component: () => import('./views/topic-edit.vue')},
+    {path: '/editorial/', name: 'editorial', component: () => import('./views/editorial.vue')},
+    {path: '/system/', component: () => import('./views/system.vue')},
+    {path: '/search/', name: 'search', component: () => import('./views/search.vue')},
+]
+
+const router = new VueRouter({
+    history: true,
+    root: config.admin_root,
+    routes
 });
 
 
