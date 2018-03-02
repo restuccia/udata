@@ -1,22 +1,19 @@
 import config from 'config';
-import $ from 'jquery';
 import commonmark from 'helpers/commonmark';
 import txt from 'helpers/text';
 
 
-export function install(Vue, options) {
-    options = options || {};
-
+export function install(Vue) {
     Vue.directive('markdown', {
-        bind: function() {
-            $(this.el).addClass('markdown');
+        bind(el) {
+            el.classList.add('markdown');
         },
-        update: function(value) {
-            this.el.classList.add('markdown');
-            this.el.innerHTML = value ? commonmark(value, config.markdown) : '';
+        update: function(el, binding) {
+            el.classList.add('markdown');
+            el.innerHTML = binding.value ? commonmark(binding.value, config.markdown) : '';
         },
-        unbind: function() {
-            $(this.el).removeClass('markdown');
+        unbind(el) {
+            el.classList.remove('markdown');
         },
     });
 
