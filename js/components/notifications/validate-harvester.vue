@@ -1,8 +1,8 @@
 <template>
-<a v-link="link">
+<router-link :to="link">
     <span class="fa fa-fw fa-tasks text-aqua"></span>
     {{ _('Pending harvester validation for {name}', details) }}
-</a>
+</router-link>
 </template>
 
 <script>

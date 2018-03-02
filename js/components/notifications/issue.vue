@@ -1,8 +1,8 @@
 <template>
-<a v-link="link">
+<router-link :to="link">
     <span class="fa fa-fw fa-warning text-yellow"></span>
     {{ details.title }}
-</a>
+</router-link>
 </template>
 
 <script>

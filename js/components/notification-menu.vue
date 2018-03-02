@@ -9,7 +9,7 @@
         <li class="header text-center">{{ _('Notifications') }}</li>
         <li>
             <ul class="menu">
-                <li v-for="notification in notifications" :key="notification.details">
+                <li v-for="(notification, idx) in notifications" :key="idx">
                     <component :is="notification.type"
                         :details="notification.details"></component>
                 </li>
@@ -21,6 +21,11 @@
 
 <script>
 import API from 'api';
+import issue from 'components/notifications/issue.vue';
+import discussion from 'components/notifications/discussion.vue';
+import membership_request from 'components/notifications/membership_request.vue';
+import transfer_request from 'components/notifications/transfer.vue';
+import validate_harvester from 'components/notifications/validate-harvester.vue';
 
 const INITIAL_FETCH = 5 * 1000;
 const POLL_INTERVAL = 30 * 1000;
@@ -33,13 +38,7 @@ export default {
         };
     },
     // Components name matters (beware of the low dash)
-    components: {
-        'issue': require('components/notifications/issue.vue'),
-        'discussion': require('components/notifications/discussion.vue'),
-        'membership_request': require('components/notifications/membership_request.vue'),
-        'transfer_request': require('components/notifications/transfer.vue'),
-        'validate_harvester': require('components/notifications/validate-harvester.vue'),
-    },
+    components: {issue,discussion,membership_request,transfer_request,validate_harvester},
     created() {
         // Trigger an initial fetch (don't wait for poll interval)
         setTimeout(this.fetch.bind(this), INITIAL_FETCH);
