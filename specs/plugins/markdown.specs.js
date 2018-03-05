@@ -35,7 +35,7 @@ describe('Markdown plugin', function() {
         }
 
         it('should render empty string as ""', function() {
-            expect(el('').childNodes).to.be.emtpy;
+            expect(el('').childNodes).to.be.empty;
         });
 
         it('should render null value as ""', function() {
@@ -62,7 +62,7 @@ describe('Markdown plugin', function() {
         }
 
         it('should render empty string as ""', function() {
-            expect(el('').childNodes).to.be.emtpy;
+            expect(el('').childNodes).to.be.empty;
         });
 
         it('should render null value as ""', function() {

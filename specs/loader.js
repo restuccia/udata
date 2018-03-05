@@ -2,7 +2,7 @@
  * Webpack spec loader
  */
 // Import polyfills first
-import 'babel-polyfill';
+import '@babel/polyfill';
 import 'whatwg-fetch';
 import './polyfills/dom';
 

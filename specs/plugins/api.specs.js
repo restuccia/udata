@@ -14,12 +14,12 @@ describe('API Plugin', function() {
         });
 
         it('expose a global Vue.api', function() {
-            expect(Vue.api).to.be.defined;
+            expect(Vue.api).to.exist;
             expect(Vue.api).to.be.instanceof(plugin.Api);
         });
 
         it('expose an instance $api', function() {
-            expect(new Vue().$api).to.be.defined;
+            expect(new Vue().$api).to.exist;
             expect(Vue.api).to.be.instanceof(plugin.Api);
         });
     });

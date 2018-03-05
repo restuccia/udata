@@ -33,39 +33,35 @@ module.exports = function(config) {
 
         webpack: {
             resolve: {
-                root: [
+                modules: [
                     ROOT,
                     path.join(ROOT, 'js'),
+                    path.join(ROOT, 'node_modules'),
                 ],
                 alias: {
                     'api': 'specs/mocks/api',
+                    // Allow template compiler
+                    vue$: 'vue/dist/vue.common.js',
                 }
             },
             watch: WATCH,
             devtool: 'inline-source-map',
             module: {
-                loaders: [
+                rules: [
                     {test: /\.(jpg|jpeg|png|gif|svg)$/, loader: 'null-loader'},
                     {test: /\.css$/, loader: 'null-loader'},
                     {test: /\.less$/, loader: 'null-loader'},
-                    {test: /\.vue$/, loader: 'vue-loader'},
+                    {test: /\.vue$/, loader: 'vue-loader', options: {
+                        loaders: {
+                            css: 'null-loader',
+                            less: 'null-loader',
+                            js: 'babel-loader'
+                        }
+                    }},
                     {test: /\.json$/, loader: 'json-loader'},
                     {test: /\.(woff|svg|ttf|eot|otf)([\?]?.*)$/, exclude: /img/, loader: 'null-loader'},
                     {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
                 ]
-            },
-            vue: {
-                loaders: {
-                    css: 'null-loader',
-                    less: 'null-loader'
-                }
-            },
-            babel: {
-                presets: ['es2015'],
-                comments: false,
-                plugins: [
-                    ['transform-builtin-extend', {globals: ['Error']}],
-                ],
             },
             plugins: [
                 new webpack.IgnorePlugin(/moment\/locale\/.*/),
@@ -74,6 +70,9 @@ module.exports = function(config) {
                     $: 'jquery',
                     jQuery: 'jquery',
                     'window.jQuery': 'jquery',
+                }),
+                new webpack.DefinePlugin({
+                    DEBUG: true
                 }),
             ]
         },
