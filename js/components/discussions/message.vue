@@ -70,23 +70,21 @@
 <template>
     <div class="discussion-message">
         <div class="avatar">
-            <a href="{{ message.posted_by.page }}"><avatar :user="message.posted_by"></avatar></a>
+            <a :href="message.posted_by.page"><avatar :user="message.posted_by"></avatar></a>
         </div>
         <div class="message-content">
             <div class="message-header">
                 <div class="author">
-                    <a href="{{ message.posted_by.page }}">{{ message.posted_by | display }}</a>
+                    <a :href="message.posted_by.page">{{ message.posted_by | display }}</a>
                 </div>
 
                 <div class="posted_on">
-                    {{ formatDate(message.posted_on) }}
-                    <a href="#{{ discussion }}-{{ index }}"><span class="fa fa-link"></span></a>
+                    {{ message.posted_on | dt('LL') }}
+                    <a :href="htmlId"><span class="fa fa-link"></span></a>
                 </div>
             </div>
 
-            <div class="body">
-                {{{ message.content | markdown }}}
-            </div>
+            <div class="body" v-markdown="message.content"></div>
        </div>
     </div>
 </template>
@@ -101,10 +99,10 @@ export default {
         discussion: String,
         index: Number,
     },
-    methods: {
-        formatDate(val) {
-            return moment(val).format('LL');
-        }
+    computed: {
+        htmlId() {
+            return `#${this.discussion}-${this.index}`;
+        },
     }
 }
 

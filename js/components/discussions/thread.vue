@@ -24,20 +24,23 @@
 <div class="discussion-thread panel panel-default">
     <div class="panel-heading" @click="toggleDiscussions">
         <div>
-            <a href="#{{ discussionIdAttr }}" class="pull-right" v-on:click.stop><span class="fa fa-link"></span></a>
+            <a :href="`#${ discussionIdAttr }`" class="pull-right" v-on:click.stop><span class="fa fa-link"></span></a>
             <strong>{{ discussion.title }}</strong>
-            <span class="label label-warning" v-if="discussion.closed"><i class="fa fa-minus-circle" aria-hidden="true"></i> {{ _('closed discussion') }}</span>
+            <span class="label label-warning" v-if="discussion.closed">
+                <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                {{ _('closed discussion') }}
+            </span>
         </div>
     </div>
     <div class="list-group" v-show="detailed">
        <thread-message
            v-for="(index, response) in discussion.discussion" :key="index"
-           id="{{ discussionIdAttr }}-{{ index }}"
+           :id="`${ discussionIdAttr }-${ index }`"
            :discussion="discussionIdAttr"
            :index="index"
            :message="response"
            class="list-group-item"
-       ></threadmessage>
+       ></thread-message>
     </div>
 
     <div class="add-comment" v-show="detailed && !discussion.closed">
@@ -47,9 +50,9 @@
             @click="displayForm">
             {{ _('Add a comment') }}
         </button>
-        <div v-el:form id="{{ discussionIdAttr }}-new-comment" v-show="formDisplayed && currentUser"
-            class="animated form">
-            <thread-form v-ref:form :discussion-id="discussion.id"></thread-form>
+        <div ref="form" :id="`${ discussionIdAttr }-new-comment`"
+            v-show="formDisplayed && currentUser" class="animated form">
+            <thread-form ref="form" :discussion-id="discussion.id"></thread-form>
         </div>
     </div>
 
@@ -61,7 +64,7 @@
         <div class="text-muted">
             {{ _('Discussion has been closed') }}
             {{ _('by') }} <a :href="discussion.closed_by.page">{{ discussion.closed_by | display }}</a>
-            {{ _('on') }} {{ closedDate }}
+            {{ _('on') }} {{ discussion.closed | dt('LL') }}
         </div>
     </div>
 </div>
@@ -98,12 +101,6 @@ export default {
         discussionIdAttr() {
             return `discussion-${this.discussion.id}`;
         },
-        createdDate() {
-            return moment(this.discussion.created).format('LL');
-        },
-        closedDate() {
-            return moment(this.discussion.closed).format('LL');
-        }
     },
     methods: {
         toggleDiscussions() {

@@ -33,7 +33,7 @@
         :readonly="readonly">
     <span class="input-group-btn">
         <button class="btn btn-danger" type="button" @click.prevent="clear">
-            <span class="fa fa-remove">
+            <span class="fa fa-remove"></span>
         </button>
     </span>
     <div class="dropdown-menu" :style="dropdownStyle">

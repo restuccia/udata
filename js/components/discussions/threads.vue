@@ -68,7 +68,7 @@
     <discussion-thread ref="threads"
         v-for="discussion in discussions" :key="discussion.id"
         :discussion="discussion"
-        id="discussion-{{ discussion.id }}">
+        :id="`discussion-${ discussion.id }`">
     </discussion-thread>
 
     <!-- New discussion -->

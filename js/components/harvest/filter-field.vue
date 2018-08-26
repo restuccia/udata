@@ -10,7 +10,7 @@
         :placeholder="placeholder"></input>
     <span class="input-group-btn">
         <button class="btn btn-danger" type="button" @click.prevent="onDelete">
-            <span class="fa fa-remove">
+            <span class="fa fa-remove"></span>
         </button>
     </span>
 </div>
