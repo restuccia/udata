@@ -1,6 +1,7 @@
 import log from 'logger';
 import tooltip from 'components/tooltip.vue';
 import popover from 'components/popover.vue';
+import { closestVm } from 'utils';
 
 
 export function install(Vue) {
@@ -12,37 +13,40 @@ export function install(Vue) {
         /**
          * Insert the tooltip element and attach the event listeners
          */
-        bind() {
-            this.tooltipEl = document.createElement('span');
-            document.body.appendChild(this.tooltipEl);
+        bind(el) {
+            // const $vm = closestVm(el);
+            // const tooltipEl = document.createElement('span');
+            // document.body.appendChild(tooltipEl);
 
-            this.tooltip = new Vue(Object.assign({
-                el: this.tooltipEl,
-                parent: this.vm,
-                propsData: {
-                    target: this.el,
-                    content: this.params.title,
-                    placement: this.params.tooltipPlacement || 'top',
-                    effect: this.params.tooltipEffect || 'fadein',
-                }
-            }, tooltip));
 
-            this._mouseenterHandler = this.el.addEventListener('mouseenter', this.showTooltip.bind(this));
-            this._mouseleaveHandler = this.el.addEventListener('mouseleave', this.hideTooltip.bind(this));
-            this._focusHandler = this.el.addEventListener('focus', this.showTooltip.bind(this));
-            this._blurHandler = this.el.addEventListener('blur', this.hideTooltip.bind(this));
+            // const tooltipVm = new Vue(Object.assign({
+            //     el: tooltipEl,
+            //     parent: $vm,
+            //     propsData: {
+            //         target: el,
+            //         content: el.getAttribute('title'),
+            //         placement: el.getAttribute('tooltip-placement') || 'top',
+            //         effect: el.getAttribute('tooltip-effect') || 'fadein',
+            //     }
+            // }, tooltip));
 
-            // Easy tooltip setting
-            this.el.setTooltip = function(content, show) {
-                this.tooltip.content = content;
-                if (show) this.showTooltip();
-            }.bind(this);
+            // // this._mouseenterHandler = this.el.addEventListener('mouseenter', this.showTooltip.bind(this));
+            // // this._mouseleaveHandler = this.el.addEventListener('mouseleave', this.hideTooltip.bind(this));
+            // // this._focusHandler = this.el.addEventListener('focus', this.showTooltip.bind(this));
+            // // this._blurHandler = this.el.addEventListener('blur', this.hideTooltip.bind(this));
+
+            // // Easy tooltip setting
+            // el.setTooltip = function(content, show) {
+            //     el.tooltip.content = content;
+            //     if (show) this.showTooltip();
+            // }
         },
         /**
          * Update the tooltip content
          */
         update(value) {
-            if (value) this.tooltip.content = value;
+            console.log('update', value, arguments)
+            // if (value) this.tooltip.content = value;
         },
         /**
          * Remove event listeners

@@ -74,11 +74,16 @@ export default {
             return true;
         }
     },
-    route: {
-        data() {
-            this.source.fetch(this.$route.params.oid);
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.source.fetch(to.params.oid);
+        });
+    },
+    beforeRouteUpdate(to, from, next) {
+        if (to.params.oid !== this.source.id) {
+            this.source.fetch(to.params.oid);
             this.$scrollTo(this.$el);
         }
-    }
+    },
 };
 </script>

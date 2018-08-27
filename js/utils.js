@@ -73,6 +73,15 @@ export function escapeRegex(str) {
     return str.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&');
 }
 
+/**
+ * Get the closest Vue.js component
+ */
+export function closestVm(el) {
+    while (!el.__vue__ || (el= el.parentElement));
+    // while ((el = el.parentElement) && !el.classList.contains(cls));
+    return el.__vue__;
+}
+
 
 export default {
     isFunction,
@@ -82,4 +91,5 @@ export default {
     setattr,
     parseQS,
     escapeRegex,
+    closestVm,
 };

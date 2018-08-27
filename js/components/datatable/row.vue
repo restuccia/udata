@@ -42,7 +42,7 @@ export default {
             return field.type ? `${field.type}-cell` : 'text-cell';
         },
         item_click(item) {
-            this.$dispatch('datatable:item:click', item);
+            this.$emit('item:click', item);
         },
     }
 };

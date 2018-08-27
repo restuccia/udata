@@ -224,6 +224,17 @@ export default {
             }
         }
     },
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.dataset.fetch(to.params.oid);
+        });
+    },
+    beforeRouteUpdate(to, from, next) {
+        if (to.params.oid !== this.dataset.id) {
+            this.dataset.fetch(to.params.oid);
+            this.$scrollTo(this.$el);
+        }
+    },
     watch: {
         'dataset.id': function(id) {
             if (id) {

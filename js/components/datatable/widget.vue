@@ -42,7 +42,7 @@
     <header class="datatable-header">
         <slot name="header"></slot>
     </header>
-    <datatable v-if="p.has_data" :p="p" :fields="fields" :track="track">
+    <datatable v-if="p.has_data" :p="p" :fields="fields" :track="track" @item:click="onItemClick">
     </datatable>
     <div class="text-center lead" v-if="!p.has_data">
     {{ empty || _('No data')}}
@@ -112,6 +112,9 @@ export default {
     methods: {
         search() {
             this.p.search(this.search_query);
+        },
+        onItemClick(item) {
+            this.$emit('item:click', item);
         }
     },
     watch: {

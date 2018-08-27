@@ -35,6 +35,9 @@ export default {
             classes[`alert-${this.alert.type || 'success'}`] = true;
             return classes;
         },
+        iconClasses() {
+            return ['icon', 'fa', `fa-${alert.icon || 'check'}`];
+        },
         details() {
             if (this.alert && this.alert.details) {
                 return this.alert.details.replace(/\n/g, '<br/>');

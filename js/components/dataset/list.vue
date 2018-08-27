@@ -4,6 +4,7 @@
         boxclass="datasets-widget"
         :fields="fields" :p="datasets"
         :downloads="downloads"
+        @item:click="onClick"
         :empty="_('No dataset')">
     </datatable>
 </div>
@@ -83,11 +84,6 @@ export default {
             }]
         };
     },
-    events: {
-        'datatable:item:click': function(dataset) {
-            this.$go(`/dataset/${dataset.id}/`);
-        }
-    },
     props: {
         datasets: null,
         downloads: {
@@ -101,6 +97,11 @@ export default {
             default() {
                 return this._('Datasets');
             }
+        }
+    },
+    methods: {
+        onClick(dataset) {
+            this.$go(`/dataset/${dataset.id}/`);
         }
     }
 };

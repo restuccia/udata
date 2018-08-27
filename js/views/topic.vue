@@ -66,13 +66,16 @@ export default {
             this.$root.$modal(DeleteModal, {topic: this.topic});
         },
     },
-    route: {
-        data() {
-            if (this.$route.params.oid !== this.topic.id) {
-                this.topic.fetch(this.$route.params.oid);
-                this.$scrollTo(this.$el);
-            }
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.topic.fetch(to.params.oid);
+        });
+    },
+    beforeRouteUpdate(to, from, next) {
+        if (to.params.oid !== this.topic.id) {
+            this.topic.fetch(to.params.oid);
+            this.$scrollTo(this.$el);
         }
-    }
+    },
 };
 </script>

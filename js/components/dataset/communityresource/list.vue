@@ -2,6 +2,7 @@
 <div>
     <datatable :title="title" icon="code-fork"
         boxclass="community-widget"
+        @item:click="onClick"
         :fields="fields"
         :p="communities"
         :empty="_('No community resources')">
@@ -54,8 +55,8 @@ export default {
         }
         return {fields};
     },
-    events: {
-        'datatable:item:click'(community) {
+    methods: {
+        onClick(community) {
             const dataset_id = community.dataset ? community.dataset.id : 'deleted';
             this.$go({name: 'dataset-community-resource', params: {
                 oid: dataset_id, rid: community.id

@@ -17,14 +17,14 @@
         </strong>
         {{ dataset | frequency_label }}
     </div>
-    <div v-if="dataset.tags | length" class="label-list">
+    <div v-if="dataset.tags" class="label-list">
         <strong>
             <span class="fa fa-fw fa-tags"></span>
             {{ _('Tags') }}:
         </strong>
         <span v-for="tag in dataset.tags" class="label label-default">{{tag}}</span>
     </div>
-    <div v-if="dataset.badges | length" class="label-list">
+    <div v-if="dataset.badges" class="label-list">
         <strong>
             <span class="fa fa-fw fa-bookmark"></span>
             {{ _('Badges') }}:

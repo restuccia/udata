@@ -34,7 +34,7 @@ export default {
             if (form.validate()) {
                 this.dataset.update(form.serialize(), (response) => {
                     this.dataset.on_fetched(response);
-                    
+
                     if (!form.hideNotifications) {
                         this.$dispatch('notify', {
                             autoclose: true,
@@ -54,13 +54,16 @@ export default {
             this.$go({name: 'dataset', params: {oid: this.dataset.id}});
         }
     },
-    route: {
-        data() {
-            if (this.$route.params.oid !== this.dataset.id) {
-                this.dataset.fetch(this.$route.params.oid);
-                this.$scrollTo(this.$el);
-            }
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.dataset.fetch(to.params.oid);
+        });
+    },
+    beforeRouteUpdate(to, from, next) {
+        if (to.params.oid !== this.dataset.id) {
+            this.dataset.fetch(to.params.oid);
+            this.$scrollTo(this.$el);
         }
-    }
+    },
 };
 </script>

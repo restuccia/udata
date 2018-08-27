@@ -45,12 +45,12 @@
             <thead>
                 <tr>
                     <th v-if="reordering" width="30"></th>
-                    <th v-i18n="Name"></th>
-                    <th width="100" v-i18n="Type"></th>
-                    <th width="100" v-i18n="Format"></th>
-                    <th width="100" v-i18n="Size"></th>
-                    <th width="120" v-i18n="Downloads"></th>
-                    <th width="100" v-i18n="Availability"></th>
+                    <th>{{ _('Name') }}</th>
+                    <th width="100">{{ _('Type') }}</th>
+                    <th width="100">{{ _('Format') }}</th>
+                    <th width="100">{{ _('Size') }}</th>
+                    <th width="120">{{ _('Downloads') }}</th>
+                    <th width="100">{{ _('Availability') }}</th>
                 </tr>
             </thead>
             <tbody ref="sortable">

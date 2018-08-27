@@ -22,7 +22,8 @@
     </thead>
     <tbody>
         <tr v-for="item in p.data" :key="item[trackBy]" is="row"
-            :item="item" :fields="fields" :selected="item === selected">
+            :item="item" :fields="fields" :selected="item === selected"
+            @item:click="onClick">
         </tr>
     </tbody>
 </table>
@@ -90,6 +91,10 @@ export default {
             }
 
             return classes;
+        },
+        onClick(item) {
+            this.selected = item;
+            this.$emit('item:click', item);
         }
     },
     filters: {

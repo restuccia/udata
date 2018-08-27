@@ -235,26 +235,14 @@ export default {
         }
     },
     beforeRouteEnter(to, from, next) {
-        console.log('before route enter')
         next(vm => {
             vm.org.fetch(to.params.oid);
         });
     },
     beforeRouteUpdate(to, from, next) {
-        console.log('before route update')
         if (to.params.oid !== this.org.id) {
             this.org.fetch(to.params.oid);
             this.$scrollTo(this.$el);
-        }
-    },
-    route: {
-
-        data() {
-            console.log('route data')
-            if (this.$route.params.oid !== this.org.id) {
-                this.org.fetch(this.$route.params.oid);
-                this.$scrollTo(this.$el);
-            }
         }
     },
     watch: {

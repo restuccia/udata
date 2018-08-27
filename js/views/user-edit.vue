@@ -32,13 +32,16 @@ export default {
             this.$go({name: 'user'});
         }
     },
-    route: {
-        data() {
-            if (this.$route.params.oid !== this.user.id) {
-                this.user.fetch(this.$route.params.oid);
-                this.$scrollTo(this.$el);
-            }
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.user.fetch(to.params.oid);
+        });
+    },
+    beforeRouteUpdate(to, from, next) {
+        if (to.params.oid !== this.user.id) {
+            this.user.fetch(to.params.oid);
+            this.$scrollTo(this.$el);
         }
-    }
+    },
 };
 </script>
