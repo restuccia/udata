@@ -29,15 +29,6 @@ export default {
         };
     },
     components: {AppHeader, Sidebar},
-    events: {
-        notify: function(notification) {
-            this.notifications.push(notification);
-        },
-        'notify:close': function(notification) {
-            const index = this.notifications.indexOf(notification);
-            this.notifications.splice(index, 1);
-        }
-    },
     mounted() {
         // Display an error identifier un uncaught error
         document.addEventListener('ravenSuccess', (e) => {
@@ -63,6 +54,13 @@ export default {
             document.body.classList.toggle('sidebar-collapse');
             document.body.classList.toggle('sidebar-open');
             this.toggled = !this.toggled;
+        },
+        notify(notification) {
+            this.notifications.push(notification);
+        },
+        closeNotification(notification) {
+            const index = this.notifications.indexOf(notification);
+            this.notifications.splice(index, 1);
         }
     }
 };

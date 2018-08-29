@@ -44,7 +44,7 @@ export default {
                 {user: this.user.id},
                 response => {
                     this.$refs.modal.close();
-                    this.$dispatch('notify', {
+                    this.$root.notify({
                         icon: 'exclamation-triangle',
                         title: this._('The user {fullname} has been successfully deleted',
                                       {fullname: this.user.fullname}
@@ -55,7 +55,7 @@ export default {
                 },
                 response => {
                     this.$refs.modal.close();
-                    this.$dispatch('notify', {
+                    this.$root.notify({
                         type: 'error',
                         icon: 'exclamation-triangle',
                         title: this._('An error {status} occured',

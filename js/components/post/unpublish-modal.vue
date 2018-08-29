@@ -40,7 +40,7 @@ export default {
         confirm() {
             API.posts.unpublish_post({post: this.post.id}, (response) => {
                 this.post.on_fetched(response);
-                this.$dispatch('notify', {
+                this.$root.notify({
                     autoclose: true,
                     title: this._('Post unpublished'),
                 });

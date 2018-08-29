@@ -37,7 +37,7 @@ export default {
         confirm() {
             API.posts.delete_post({post: this.post.id},
                 (response) => {
-                    this.$dispatch('notify', {
+                    this.$root.notify({
                         autoclose: true,
                         title: this._('Post deleted'),
                     });

@@ -110,7 +110,7 @@ export default {
                     comment: this.comment || undefined
                 }
             }, (response) => {
-                this.$dispatch('notify', {
+                this.$root.notify({
                     title: this._('Transfer requested'),
                     details: this._('The recipient need to accept the transfer in order to complete it.')
                 });

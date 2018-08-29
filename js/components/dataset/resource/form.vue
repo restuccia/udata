@@ -299,7 +299,7 @@ export default {
             const isValid = this.$refs.form.validate();
 
             if (isValid & !this.hideNotifications) {
-                this.$dispatch('notify', {
+                this.$root.notify({
                     autoclose: true,
                     title: this._('Changes saved'),
                     details: this._('Your resource has been updated.')

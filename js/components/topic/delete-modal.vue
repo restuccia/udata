@@ -38,7 +38,7 @@ export default {
         confirm() {
             API.topics.delete_topic({topic: this.topic.id},
                 (response) => {
-                    this.$dispatch('notify', {
+                    this.$root.notify({
                         autoclose: true,
                         title: this._('Topic deleted'),
                     });

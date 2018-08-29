@@ -36,7 +36,7 @@ export default {
                     this.dataset.on_fetched(response);
 
                     if (!form.hideNotifications) {
-                        this.$dispatch('notify', {
+                        this.$root.notify({
                             autoclose: true,
                             title: this._('Changes saved'),
                             details: this._('Your dataset has been updated.')

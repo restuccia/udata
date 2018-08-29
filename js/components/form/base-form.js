@@ -236,7 +236,7 @@ export default {
             }
             // Display the error identifier if present
             if (response.headers && 'X-Sentry-ID' in response.headers) {
-                this.$dispatch('notify', {
+                this.$root.notify({
                     type: 'error',
                     icon: 'exclamation-triangle',
                     title: this._('An error occured'),

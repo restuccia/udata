@@ -48,14 +48,14 @@ export default {
         close() {
             this.closing = true;
             setTimeout(() => {
-                this.$dispatch('notify:close', this.alert);
+                this.$root.closeNotification(this.alert);
             }, TRANSITION_DURATION)
         }
     },
     mounted() {
         if (this.alert.autoclose) {
             setTimeout(() => {
-                this.$dispatch('notify:close', this.alert)
+                this.$root.closeNotification(this.alert);
             }, AUTOCLOSE_DELAY);
         }
     }

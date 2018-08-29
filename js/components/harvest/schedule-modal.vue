@@ -102,7 +102,7 @@ export default {
                         name: response.obj.name,
                         schedule: response.obj.schedule
                     });
-                    this.$dispatch('notify', {title: msg, autoclose: true});
+                    this.$root.notify({title: msg, autoclose: true});
                     this.goBack();
                 });
             }
@@ -112,7 +112,7 @@ export default {
                 const msg = this._('{name} has been unscheduled', {
                     name: this.source.name,
                 });
-                this.$dispatch('notify', {title: msg, autoclose: true});
+                this.$root.notify({title: msg, autoclose: true});
                 this.goBack();
             });
         },

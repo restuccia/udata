@@ -44,7 +44,7 @@ export default {
                 },
                 response => {
                     this.$refs.modal.close();
-                    this.$dispatch('notify', {
+                    this.$root.notify({
                         type: 'error',
                         icon: 'exclamation-triangle',
                         title: this._('An error {status} occured',

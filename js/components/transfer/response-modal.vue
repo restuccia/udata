@@ -99,7 +99,7 @@ export default {
                     comment: this.comment || undefined
                 }
             }, (response) => {
-                this.$dispatch('notify', {
+                this.$root.notify({
                     title: this._('Response sent'),
                     details: this._('The response has been sent to the requester.')
                 });

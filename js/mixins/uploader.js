@@ -238,7 +238,7 @@ export default {
                     reason = [reason, this._('The error identifier is {id}', {id: sentryId})].join('\n');
                 }
             }
-            this.$dispatch('notify', {
+            this.$root.notify({
                 type: 'error',
                 icon: 'exclamation-triangle',
                 title: this._('Upload error on {name}', {name}),

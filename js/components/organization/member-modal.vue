@@ -95,7 +95,7 @@ export default {
         },
         on_deleted(response) {
             this.org.fetch();
-            this.$dispatch('notify', {
+            this.$root.notify({
                 title: this._('Member deleted'),
                 details: this._('{user} is not a member of this organization anymore')
                     .replace('{user}', this.user.fullname)
@@ -116,7 +116,7 @@ export default {
         },
         on_created(response) {
             this.org.fetch();
-            this.$dispatch('notify', {
+            this.$root.notify({
                 title: this._('Member added'),
                 details: this._('{user} is now {role} of this organization')
                     .replace('{user}', this.user.fullname)
@@ -126,7 +126,7 @@ export default {
         },
         on_updated(response) {
             this.org.fetch();
-            this.$dispatch('notify', {
+            this.$root.notify({
                 title: this._('Member role updated'),
                 details: this._('{user} is now {role} of this organization')
                     .replace('{user}', this.user.fullname)
