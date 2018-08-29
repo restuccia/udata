@@ -2,7 +2,7 @@
 <div>
     <!-- Placeholder for non-routable modals -->
     <div ref="modal"></div>
-    <app-header></app-header>
+    <app-header @navigation:toggled="toggleNavigation"></app-header>
     <sidebar></sidebar>
     <router-view></router-view>
 </div>
@@ -30,11 +30,6 @@ export default {
     },
     components: {AppHeader, Sidebar},
     events: {
-        'navigation:toggled': function() {
-            document.body.classList.toggle('sidebar-collapse');
-            document.body.classList.toggle('sidebar-open');
-            this.toggled = !this.toggled;
-        },
         notify: function(notification) {
             this.notifications.push(notification);
         },
@@ -63,6 +58,11 @@ export default {
                 notif.icon = 'ban'
             }
             this.notifications.push(notif);
+        },
+        toggleNavigation() {
+            document.body.classList.toggle('sidebar-collapse');
+            document.body.classList.toggle('sidebar-open');
+            this.toggled = !this.toggled;
         }
     }
 };

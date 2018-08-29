@@ -46,7 +46,7 @@ export default {
     components: {AddMenu, NotificationMenu, UserMenu},
     methods: {
         click() {
-            this.$dispatch('navigation:toggled');
+            this.$emit('navigation:toggled');
         }
     }
 };
