@@ -166,12 +166,15 @@ export default {
             );
         }
     },
-    route: {
-        data() {
-            if (this.$route.params.oid !== this.reuse.id) {
-                this.reuse.fetch(this.$route.params.oid);
-                this.$scrollTo(this.$el);
-            }
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.reuse.fetch(to.params.oid);
+        });
+    },
+    beforeRouteUpdate(to, from, next) {
+        if (to.params.oid !== this.reuse.id) {
+            this.reuse.fetch(to.params.oid);
+            this.$scrollTo(this.$el);
         }
     },
     watch: {

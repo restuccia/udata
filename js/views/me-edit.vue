@@ -31,11 +31,10 @@ export default {
             this.$go({name: 'me'});
         }
     },
-    route: {
-        data() {
-            this.me.fetch();
-            this.$scrollTo(this.$el);
-        }
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.me.fetch();
+        });
     }
 };
 </script>

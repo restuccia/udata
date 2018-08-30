@@ -83,11 +83,14 @@ export default {
             this.goBack();
         }
     },
-    route: {
-        data() {
-            if (this.$route.params.oid !== this.source.id) {
-                this.source.fetch(this.$route.params.oid);
-            }
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.source.fetch(to.params.oid);
+        });
+    },
+    beforeRouteUpdate(to, from, next) {
+        if (to.params.oid !== this.source.id) {
+            this.source.fetch(to.params.oid);
         }
     },
     methods: {

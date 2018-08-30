@@ -87,12 +87,15 @@ export default {
             this.$root.$modal(UnpublishModal, {post: this.post});
         }
     },
-    route: {
-        data() {
-            if (this.$route.params.oid !== this.post.id) {
-                this.post.fetch(this.$route.params.oid, this.$options.MASK);
-                this.$scrollTo(this.$el);
-            }
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.post.fetch(to.params.oid, this.$options.MASK);
+        });
+    },
+    beforeRouteUpdate(to, from, next) {
+        if (to.params.oid !== this.post.id) {
+            this.post.fetch(to.params.oid, this.$options.MASK);
+            this.$scrollTo(this.$el);
         }
     }
 };

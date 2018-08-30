@@ -216,14 +216,6 @@ export default {
             );
         }
     },
-    route: {
-        data() {
-            if (this.$route.params.oid !== this.dataset.id) {
-                this.dataset.fetch(this.$route.params.oid);
-                this.$scrollTo(this.$el);
-            }
-        }
-    },
     beforeRouteEnter(to, from, next) {
         next(vm => {
             vm.dataset.fetch(to.params.oid);

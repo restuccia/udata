@@ -42,11 +42,15 @@ export default {
             this.$go({name: 'organization', params: {oid: this.org.id}});
         }
     },
-    route: {
-        data() {
-            if (this.$route.params.oid !== this.org.id) {
-                this.org.fetch(this.$route.params.oid);
-            }
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.org.fetch(to.params.oid);
+        });
+    },
+    beforeRouteUpdate(to, from, next) {
+        if (to.params.oid !== this.org.id) {
+            this.org.fetch(to.params.oid);
+            this.$scrollTo(this.$el);
         }
     }
 };

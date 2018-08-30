@@ -1,5 +1,5 @@
 <template>
-<layout :title="_('Search in your data: {q}', {q: $route.query.q})">
+<layout :title="_('Search in your data: {q}', {q})">
     <div class="row" v-if="datasets.loading || datasets.has_data">
         <datasets-list class="col-xs-12" :datasets="datasets"></datasets-list>
     </div>
@@ -10,10 +10,10 @@
         <reuses-list class="col-xs-12" :reuses="reuses"></reuses-list>
     </div>
     <div class="row" v-if="issues.loading || issues.has_data">
-        <issue-list class="col-xs-12" :issues="issues"></issue-list>
+        <issues-list class="col-xs-12" :issues="issues"></issues-list>
     </div>
     <div class="row" v-if="discussions.loading || discussions.has_data">
-        <discussion-list class="col-xs-12" :discussions="discussions"></discussion-list>
+        <discussions-list class="col-xs-12" :discussions="discussions"></discussions-list>
     </div>
     <div class="row" v-if="no_results">
         <div class="col-xs-12 text-center">
@@ -26,20 +26,20 @@
 <script>
 import {PageList} from 'models/base';
 import Layout from 'components/layout.vue';
-import DatasetList from 'components/dataset/list.vue';
-import ReuseList from 'components/reuse/list.vue';
-import IssueList from 'components/issues/list.vue';
-import DiscussionList from 'components/discussions/list.vue';
+import DatasetsList from 'components/dataset/list.vue';
+import ReusesList from 'components/reuse/list.vue';
+import IssuesList from 'components/issues/list.vue';
+import DiscussionsList from 'components/discussions/list.vue';
 import CommunityList from 'components/dataset/communityresource/list.vue';
 
 export default {
     name: 'SearchView',
     components: {
         CommunityList,
-        DiscussionList,
-        IssueList,
-        DatasetList,
-        ReuseList,
+        DiscussionsList,
+        IssuesList,
+        DatasetsList,
+        ReusesList,
         Layout
     },
     computed: {
@@ -52,6 +52,7 @@ export default {
     },
     data() {
         return {
+            q: undefined,
             datasets: new PageList({
                 ns: 'me',
                 fetch: 'my_org_datasets',
@@ -79,16 +80,26 @@ export default {
             }),
         };
     },
-    route: {
-        data() {
-            const terms = this.$route.query.q;
-            this.datasets.fetch({'q': terms});
-            this.communities.fetch({'q': terms});
-            this.reuses.fetch({'q': terms});
-            this.issues.fetch({'q': terms});
-            this.discussions.fetch({'q': terms});
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.query(to.query.q);
+        });
+    },
+    beforeRouteUpdate(to, from, next) {
+        if (to.query.q !== this.q) {
+            this.query(q);
             this.$scrollTo(this.$el);
         }
     },
+    methods: {
+        query(q) {
+            this.q = q;
+            this.datasets.fetch({'q': q});
+            this.communities.fetch({'q': q});
+            this.reuses.fetch({'q': q});
+            this.issues.fetch({'q': q});
+            this.discussions.fetch({'q': q});
+        }
+    }
 };
 </script>

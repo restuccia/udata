@@ -74,13 +74,17 @@ export default {
             this.$go({name: 'post', params: {oid: this.post.id}});
         }
     },
-    route: {
-        data() {
-            if (this.$route.params.oid !== this.post.id) {
-                this.post.fetch(this.$route.params.oid);
-                this.$scrollTo(this.$el);
-            }
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.post.fetch(to.params.oid);
+        });
+    },
+    beforeRouteUpdate(to, from, next) {
+        if (to.params.oid !== this.post.id) {
+            this.post.fetch(to.params.oid);
+            this.$scrollTo(this.$el);
         }
     }
+    
 };
 </script>
