@@ -8,7 +8,7 @@
     {% from theme('macros/metadata.html') import metadata with context %}
     {{ metadata(meta or {}) }}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ manifest('udata', 'common.css') }}">
+    {#<link rel="stylesheet" href="{{ manifest('udata', 'common.css') }}">#}
     {% if bundle_css is in_manifest %}
     <link rel="stylesheet" href="{{ manifest('udata', '{0}.css'.format(bundle)) }}">
     {% endif %}
@@ -32,7 +32,7 @@
   <body class="{{body_class}} theme-{{current_theme.variant}}">
     {% block body %}{% endblock %}
 
-    <script src="{{ manifest('udata', 'common.js') }}"></script>
+    {#<script src="{{ manifest('udata', 'common.js') }}"></script>#}
     {% if bundle_js is in_manifest %}
     <script src="{{ manifest('udata', '{0}.js'.format(bundle)) }}"></script>
     {% endif %}
