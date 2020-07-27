@@ -52,6 +52,7 @@ class Defaults(object):
     CELERY_WORKER_HIJACK_ROOT_LOGGER = False
     CELERY_BEAT_SCHEDULER = 'udata.tasks.Scheduler'
     CELERY_MONGODB_SCHEDULER_COLLECTION = "schedules"
+    CELERY_MONGODB_SCHEDULER_CONNECTION_ALIAS = "udata_scheduler"
 
     # Default celery routing
     CELERY_TASK_DEFAULT_QUEUE = 'default'
@@ -203,6 +204,8 @@ class Defaults(object):
         'plaintext',
     ]
 
+    MD_ALLOWED_PROTOCOLS = ['http', 'https', 'ftp', 'ftps']
+
     # Tags constraints
     TAG_MIN_LENGTH = 3
     TAG_MAX_LENGTH = 96
@@ -218,6 +221,9 @@ class Defaults(object):
 
     # The number of days of harvest jobs to keep (ie. number of days of history kept)
     HARVEST_JOBS_RETENTION_DAYS = 365
+
+    # The number of days since last harvesting date when a missing dataset is archived
+    HARVEST_AUTOARCHIVE_GRACE_DAYS = 7
 
     # Lists levels that shouldn't be indexed
     SPATIAL_SEARCH_EXCLUDE_LEVELS = tuple()
@@ -438,6 +444,9 @@ class Defaults(object):
 class Testing(object):
     '''Sane values for testing. Should be applied as override'''
     TESTING = True
+    # related to https://github.com/noirbizarre/flask-restplus/commit/93e412789f1ef8d1d2eab837f15535cf79bd144d#diff-68876137696247abc8c123622c73a11f  # noqa
+    # this keeps our legacy tests from failing, we should probably fix the tests instead someday
+    PROPAGATE_EXCEPTIONS = False
     SEND_MAIL = False
     WTF_CSRF_ENABLED = False
     AUTO_INDEX = False
@@ -460,7 +469,7 @@ class Testing(object):
     URLS_ALLOWED_TLDS = tld_set | set(['test'])
     URLS_ALLOW_PRIVATE = False
     # FakeSearch fields have to be declared here
-    SEARCH_FAKE_FIELDS = (
+    SEARCH_FAKESEARCHABLE_FIELDS = (
         'title^2',
         'description',
     )

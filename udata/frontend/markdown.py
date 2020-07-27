@@ -13,6 +13,7 @@ from jinja2.filters import do_truncate, do_striptags
 
 from udata.i18n import _
 
+
 md = LocalProxy(lambda: current_app.extensions['markdown'])
 
 EXCERPT_TOKEN = '<!--- --- -->'
@@ -20,13 +21,6 @@ EXCERPT_TOKEN = '<!--- --- -->'
 RE_AUTOLINK = re.compile(
     r'<([A-Za-z][A-Za-z0-9.+-]{1,31}:[^<>\x00-\x20]*)>',
     re.IGNORECASE)
-
-
-def avoid_mailto_callback(attrs, new=False):
-    """Remove completely the link containing a `mailto`."""
-    if attrs[(None, 'href')].startswith('mailto:'):
-        return None
-    return attrs
 
 
 def source_tooltip_callback(attrs, new=False):
@@ -44,6 +38,9 @@ def nofollow_callback(attrs, new=False):
     otherwise add `nofollow`.
     That callback is not splitted in order to parse the URL only once.
     """
+
+    if (None, u"href") not in attrs:
+        return attrs
     parsed_url = urlparse(attrs[(None, 'href')])
     if parsed_url.netloc in ('', current_app.config['SERVER_NAME']):
         attrs[(None, 'href')] = '{scheme}://{netloc}{path}'.format(
@@ -85,7 +82,7 @@ class UDataMarkdown(object):
         html = self.markdown(stream)
 
         # Deal with callbacks
-        callbacks = [avoid_mailto_callback, nofollow_callback]
+        callbacks = [nofollow_callback]
         if source_tooltip:
             callbacks.append(source_tooltip_callback)
         
@@ -93,8 +90,9 @@ class UDataMarkdown(object):
             tags=current_app.config['MD_ALLOWED_TAGS'],
             attributes=current_app.config['MD_ALLOWED_ATTRIBUTES'],
             styles=current_app.config['MD_ALLOWED_STYLES'],
+            protocols=current_app.config['MD_ALLOWED_PROTOCOLS'],
             strip_comments=False,
-            filters=[partial(LinkifyFilter, skip_tags=['pre'], parse_email=True,
+            filters=[partial(LinkifyFilter, skip_tags=['pre'], parse_email=False,
                              callbacks=callbacks)]
         )
 
