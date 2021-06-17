@@ -463,6 +463,14 @@ class Defaults(object):
                         'SourcesAPI.post',
                         'FollowAPI.post']
 
+    # Webhooks
+    ##########
+    # expects a list of {
+    #   "url": "https://example.com/webhook",
+    #   "secret": "{secret shared with webhook hub}",
+    # }
+    WEBHOOKS = []
+
 
 class Testing(object):
     '''Sane values for testing. Should be applied as override'''
