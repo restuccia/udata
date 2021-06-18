@@ -4,7 +4,7 @@ import logging
 
 from blinker import signal
 from dateutil.parser import parse as parse_dt
-from flask import url_for, current_app
+from flask import current_app
 from mongoengine.signals import pre_save, post_save
 from mongoengine.fields import DateTimeField
 from stringdist import rdlevenshtein
@@ -77,8 +77,8 @@ DEFAULT_FREQUENCY = 'unknown'
 
 DEFAULT_LICENSE = {
     'id': 'notspecified',
-    'title': "License Not Specified",
-    'flags': ["generic"],
+    'title': 'License Not Specified',
+    'flags': ['generic'],
     'maintainer': None,
     'url': None,
     'active': True,
