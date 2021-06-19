@@ -759,6 +759,9 @@ class CommunityResource(ResourceMixin, WithMetrics, db.Owned, db.Document):
     Local file, remote file or API added by the community of the users to the
     original dataset
     '''
+    on_create = signal('CommunityResource.on_create')
+    on_update = signal('CommunityResource.on_update')
+
     dataset = db.ReferenceField(Dataset, reverse_delete_rule=db.NULLIFY)
 
     __metrics_keys__ = [
@@ -773,6 +776,18 @@ class CommunityResource(ResourceMixin, WithMetrics, db.Owned, db.Document):
     @property
     def from_community(self):
         return True
+
+    @classmethod
+    def post_save(cls, _, document, **kwargs):
+        if 'post_save' in kwargs.get('ignores', []):
+            return
+        if kwargs.get('created'):
+            cls.on_create.send(document)
+        else:
+            cls.on_update.send(document)
+
+
+post_save.connect(CommunityResource.post_save, sender=CommunityResource)
 
 
 class ResourceSchema(object):
