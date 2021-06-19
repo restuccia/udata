@@ -1,6 +1,5 @@
 import pytest
 import shlex
-import sys
 
 from contextlib import contextmanager
 from urllib.parse import urlparse
