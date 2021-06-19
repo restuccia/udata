@@ -340,7 +340,7 @@ class Defaults(object):
     # Tiles URL for SD displays
     MAP_TILES_URL = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'
     # Tiles URL for HD/HiDPI displays
-    MAP_TILES_URL_HIDPI = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png'
+    MAP_TILES_URL_HIDPI = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png'  # noqa
     # Leaflet tiles config, see https://leafletjs.com/reference-0.7.7.html#tilelayer
     MAP_TILES_CONFIG = {
         'subdomains': 'abcd',
